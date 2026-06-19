@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>YONDO — AI Travel Consultant OS</title>
+<style>
+  :root{
+    --bg:#0a0a12;
+    --bg-soft:#11111c;
+    --card:#15151f;
+    --card-border:rgba(255,255,255,0.08);
+    --text:#f5f4ff;
+    --text-dim:#9d9ab3;
+    --violet:#8b5cf6;
+    --cyan:#22e6c8;
+    --pink:#ff4fa3;
+    --amber:#ffb84f;
+    --grad: linear-gradient(135deg,#8b5cf6 0%,#5b8def 45%,#22e6c8 100%);
+    --grad2: linear-gradient(135deg,#ff4fa3 0%,#8b5cf6 100%);
+    --radius:20px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--bg); color:var(--text); font-family:'Sora',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased; scroll-behavior:smooth;}
+  body{overflow-x:hidden;}
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--violet); color:#fff;}
+
+  /* ---------- Background ambience ---------- */
+  .glow{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(600px 400px at 15% 0%, rgba(139,92,246,0.35), transparent 60%),
+      radial-gradient(500px 350px at 90% 15%, rgba(34,230,200,0.22), transparent 60%),
+      radial-gradient(600px 500px at 50% 100%, rgba(255,79,163,0.18), transparent 60%),
+      var(--bg);
+  }
+  .noise{position:fixed; inset:0; z-index:-1; opacity:.035; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  /* ---------- Top switcher (prototype nav, not part of real site) ---------- */
+  .proto-switch{
+    position:fixed; top:10px; left:50%; transform:translateX(-50%);
+    z-index:999; display:flex; gap:4px;
+    background:rgba(10,10,18,0.85); backdrop-filter:blur(12px);
+    border:1px solid var(--card-border); border-radius:999px; padding:4px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.45);
+  }
+  .proto-switch button{
+    font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-dim);
+    background:transparent; border:none; padding:8px 16px; border-radius:999px; cursor:pointer;
+    transition:.25s;
+  }
+  .proto-switch button.active{ color:#0a0a12; background:var(--grad); }
+
+  .screen{ display:none; padding-top:54px; }
+  .screen.active{ display:block; animation:fadeIn .35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .wrap{ max-width:480px; margin:0 auto; min-height:100vh; position:relative; padding-bottom:40px;}
+
+  /* ---------- Generic components ---------- */
+  .pill{
+    display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700;
+    letter-spacing:.04em; text-transform:uppercase; color:var(--cyan);
+    background:rgba(34,230,200,0.1); border:1px solid rgba(34,230,200,0.3);
+    padding:6px 12px; border-radius:999px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:inherit; font-weight:700; font-size:15px; border:none; cursor:pointer;
+    padding:16px 22px; border-radius:14px; width:100%;
+  }
+  .btn-primary{ background:var(--grad); color:#0a0a12; box-shadow:0 10px 30px rgba(139,92,246,0.35); }
+  .btn-ghost{ background:rgba(255,255,255,0.05); color:var(--text); border:1px solid var(--card-border); }
+  .btn-sm{ width:auto; padding:10px 16px; font-size:13px; border-radius:10px; }
+
+  .card{
+    background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius);
+    padding:18px;
+  }
+
+  .section-pad{ padding:0 20px; }
+  h1,h2,h3{ font-weight:800; line-height:1.15; letter-spacing:-0.01em; }
+  .eyebrow{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); }
+  .text-dim{ color:var(--text-dim); }
+  .grad-text{
+    background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  /* =====================================================
+     HOME / LANDING
+     ===================================================== */
+  .home-nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 20px 6px;
+  }
+  .logo{ display:flex; align-items:center; gap:8px; font-weight:800; font-size:18px; letter-spacing:-0.02em; }
+  .logo-dot{ width:10px; height:10px; border-radius:50%; background:var(--grad); box-shadow:0 0 14px var(--cyan); }
+  .burger{ width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; border:1px solid var(--card-border); }
+
+  .hero{ padding:28px 20px 10px; }
+  .hero h1{ font-size:38px; margin:14px 0 12px; }
+  .hero p{ color:var(--text-dim); font-size:15.5px; line-height:1.55; margin-bottom:22px; }
+  .hero-badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+  .badge-mini{
+    font-size:11px; color:var(--text-dim); background:rgba(255,255,255,0.05);
+    border:1px solid var(--card-border); padding:6px 10px; border-radius:999px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .badge-mini b{ color:var(--text); }
+
+  .stats-row{ display:flex; gap:10px; padding:20px 20px 4px; }
+  .stat{ flex:1; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:14px 10px; text-align:center; }
+  .stat .num{ font-size:20px; font-weight:800; }
+  .stat .lbl{ font-size:10.5px; color:var(--text-dim); margin-top:2px; text-transform:uppercase; letter-spacing:.03em; }
+
+  .section-title{ padding:34px 20px 6px; }
+  .section-title h2{ font-size:24px; }
+  .section-title p{ color:var(--text-dim); font-size:14px; margin-top:6px; }
+
+  .agent-scroller{ display:flex; gap:14px; overflow-x:auto; padding:16px 20px 6px; scroll-snap-type:x mandatory; -ms-overflow-style:none; scrollbar-width:none; }
+  .agent-scroller::-webkit-scrollbar{display:none;}
+  .agent-card{
+    scroll-snap-align:start; min-width:240px; background:var(--card); border:1px solid var(--card-border);
+    border-radius:18px; padding:18px; position:relative; overflow:hidden;
+  }
+  .agent-card::before{
+    content:''; position:absolute; top:-30%; right:-30%; width:120px; height:120px; border-radius:50%;
+    filter:blur(10px); opacity:.35; background:var(--agent-color, var(--violet));
+  }
+  .agent-icon{
+    width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-size:20px; margin-bottom:12px; background:var(--agent-color, var(--violet)); box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .agent-card h3{ font-size:15.5px; margin-bottom:6px; }
+  .agent-card p{ font-size:12.5px; color:var(--text-dim); line-height:1.5; }
+  .agent-tag{ display:inline-block; margin-top:10px; font-size:10.5px; font-weight:700; color:var(--text); background:rgba(255,255,255,0.08); padding:4px 9px; border-radius:8px; }
+
+  .timeline{ padding:14px 20px; display:flex; flex-direction:column; gap:0; }
+  .tl-item{ display:flex; gap:14px; padding:14px 0; border-bottom:1px dashed var(--card-border); }
+  .tl-item:last-child{ border-bottom:none; }
+  .tl-num{ width:30px; height:30px; flex:none; border-radius:50%; background:var(--grad); color:#0a0a12; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; }
+  .tl-item h4{ font-size:14.5px; margin-bottom:3px; }
+  .tl-item p{ font-size:12.5px; color:var(--text-dim); line-height:1.5; }
+
+  .pricing-card{
+    margin:18px 20px; padding:22px; border-radius:22px;
+    background:linear-gradient(160deg, rgba(139,92,246,0.18), rgba(34,230,200,0.08));
+    border:1px solid rgba(139,92,246,0.35); position:relative;
+  }
+  .pricing-card .price{ font-size:34px; font-weight:800; margin:6px 0 2px; }
+  .pricing-card .price span{ font-size:14px; color:var(--text-dim); font-weight:600; }
+  .pricing-list{ margin:16px 0; display:flex; flex-direction:column; gap:9px; }
+  .pricing-list div{ font-size:13px; color:var(--text); display:flex; gap:8px; align-items:flex-start; }
+  .check{ color:var(--cyan); font-weight:800; }
+
+  .testi{ display:flex; gap:14px; overflow-x:auto; padding:14px 20px 4px; scroll-snap-type:x mandatory;}
+  .testi::-webkit-scrollbar{display:none;}
+  .testi-card{ scroll-snap-align:start; min-width:250px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; }
+  .testi-card p{ font-size:13px; line-height:1.55; color:var(--text); margin-bottom:10px; }
+  .testi-who{ display:flex; align-items:center; gap:8px; }
+  .avatar{ width:30px; height:30px; border-radius:50%; background:var(--grad2); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#0a0a12; }
+  .testi-who span{ font-size:11.5px; color:var(--text-dim); }
+  .testi-who b{ font-size:12.5px; display:block; }
+
+  .final-cta{ margin:30px 20px 10px; padding:26px; border-radius:24px; background:var(--grad); color:#0a0a12; position:relative; overflow:hidden; }
+  .final-cta h2{ font-size:22px; color:#0a0a12; margin-bottom:8px; }
+  .final-cta p{ font-size:13px; color:rgba(10,10,18,0.75); margin-bottom:16px; }
+  .final-cta .btn-primary{ background:#0a0a12; color:#fff; box-shadow:none; }
+
+  .footer-mini{ padding:24px 20px 0; text-align:center; color:var(--text-dim); font-size:11.5px; }
+
+  .sticky-cta{
+    position:sticky; bottom:0; left:0; right:0; z-index:50;
+    padding:12px 20px calc(14px + var(--safe-bottom));
+    background:linear-gradient(to top, rgba(10,10,18,0.95), rgba(10,10,18,0));
+    backdrop-filter:blur(6px);
+  }
+
+  /* =====================================================
+     DASHBOARD / AI AGENTS HUB
+     ===================================================== */
+  .dash-top{ padding:18px 20px 10px; display:flex; align-items:center; justify-content:space-between; }
+  .dash-greet .eyebrow{ color:var(--cyan); }
+  .dash-greet h1{ font-size:21px; margin-top:4px; }
+  .avatar-lg{ width:42px; height:42px; border-radius:14px; background:var(--grad2); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px; box-shadow:0 6px 18px rgba(255,79,163,0.3); }
+
+  .kpi-row{ display:flex; gap:10px; padding:6px 20px 4px; overflow-x:auto; scrollbar-width:none;}
+  .kpi-row::-webkit-scrollbar{display:none;}
+  .kpi{ min-width:120px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:14px; flex:none; }
+  .kpi .num{ font-size:19px; font-weight:800; }
+  .kpi .lbl{ font-size:10.5px; color:var(--text-dim); margin-top:2px; }
+  .kpi .delta{ font-size:10.5px; font-weight:700; margin-top:6px; }
+  .delta.up{ color:var(--cyan); } .delta.warn{ color:var(--amber); }
+
+  .briefing{
+    margin:16px 20px 4px; padding:16px; border-radius:18px; display:flex; gap:12px; align-items:flex-start;
+    background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.3);
+  }
+  .briefing .ic{ font-size:20px; }
+  .briefing p{ font-size:12.5px; line-height:1.55; color:var(--text); }
+  .briefing b{ color:var(--cyan); }
+
+  .agents-grid{ padding:18px 20px 6px; display:flex; flex-direction:column; gap:12px; }
+  .agent-row{
+    display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--card-border);
+    border-radius:18px; padding:14px; position:relative;
+  }
+  .agent-row:active{ transform:scale(0.98); }
+  .agent-row .ic-box{
+    width:48px; height:48px; border-radius:14px; flex:none; display:flex; align-items:center; justify-content:center;
+    font-size:22px; background:var(--agent-color, var(--violet));
+  }
+  .agent-row .info{ flex:1; min-width:0; }
+  .agent-row .info h4{ font-size:14.5px; margin-bottom:2px; display:flex; align-items:center; gap:6px;}
+  .agent-row .info p{ font-size:12px; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dot-status{ width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); flex:none; }
+  .chev{ color:var(--text-dim); font-size:18px; }
+  .notif-dot{ position:absolute; top:10px; right:34px; width:8px; height:8px; border-radius:50%; background:var(--pink); }
+
+  .quick-actions{ padding:6px 20px 4px; }
+  .qa-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px; }
+  .qa-item{ background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:12px 6px; text-align:center; }
+  .qa-item .ic{ font-size:18px; margin-bottom:6px; }
+  .qa-item span{ font-size:10px; color:var(--text-dim); }
+
+  .feed{ padding:8px 20px 4px; display:flex; flex-direction:column; gap:10px; }
+  .feed-item{ display:flex; gap:10px; align-items:flex-start; background:var(--bg-soft); border:1px solid var(--card-border); border-radius:14px; padding:12px; }
+  .feed-item .ic{ font-size:16px; margin-top:1px; }
+  .feed-item p{ font-size:12px; color:var(--text); line-height:1.45; }
+  .feed-item time{ font-size:10px; color:var(--text-dim); display:block; margin-top:3px; }
+
+  .bottom-nav{
+    position:fixed; bottom:0; left:0; right:0; z-index:60; max-width:480px; margin:0 auto;
+    background:rgba(15,15,23,0.92); backdrop-filter:blur(16px); border-top:1px solid var(--card-border);
+    display:flex; padding:8px 6px calc(8px + var(--safe-bottom));
+  }
+  .nav-item{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; color:var(--text-dim); font-size:10px; font-weight:600; border-radius:12px; }
+  .nav-item.active{ color:var(--cyan); }
+  .nav-item .ic{ font-size:18px; }
+  .fab{
+    position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    width:52px; height:52px; border-radius:50%; background:var(--grad);
+    display:flex; align-items:center; justify-content:center; font-size:24px; color:#0a0a12;
+    box-shadow:0 8px 24px rgba(139,92,246,0.5); border:4px solid var(--bg);
+  }
+
+  @media (min-width:560px){
+    .wrap{ border-left:1px solid var(--card-border); border-right:1px solid var(--card-border); }
+  }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="noise"></div>
+
+<div class="proto-switch">
+  <button id="btn-home" class="active" onclick="showScreen('home')">Home</button>
+  <button id="btn-dash" onclick="showScreen('dash')">Dashboard</button>
+</div>
+
+<!-- =====================================================
+     SCREEN 1 — HOME / LANDING
+     ===================================================== -->
+<div class="screen active" id="screen-home">
+  <div class="wrap">
+
+    <div class="home-nav">
+      <div class="logo"><span class="logo-dot"></span>YONDO</div>
+      <div class="burger">☰</div>
+    </div>
+
+    <div class="hero">
+      <span class="pill">● 5 AI Agent, zero stress</span>
+      <h1>Diventa un <span class="grad-text">travel consultant AI-powered</span>. Da zero a operativo in 30 giorni.</h1>
+      <p>YONDO ti dà un team di 5 AI Agent personali che fanno preventivi, rispondono ai clienti, trovano destinazioni e ti coachano sui numeri — così tu vendi, e basta.</p>
+      <button class="btn btn-primary">Inizia ora — è gratis 🚀</button>
+      <div class="hero-badges">
+        <div class="badge-mini">⚡ <b>60 sec</b> per proposta</div>
+        <div class="badge-mini">🤖 <b>24/7</b> operativi</div>
+        <div class="badge-mini">📈 <b>75%</b> margin share</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="num">5</div><div class="lbl">AI Agent</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Capo umano</div></div>
+      <div class="stat"><div class="num">79€</div><div class="lbl">AI Suite/mese</div></div>
+      <div class="stat"><div class="num">24/7</div><div class="lbl">Sempre attivi</div></div>
+    </div>
+
+    <div class="section-title">
+      <h2>Il tuo team AI, sempre con te</h2>
+      <p>5 agenti specializzati nel travel, connessi ai tuoi sistemi reali.</p>
+    </div>
+
+    <div class="agent-scroller">
+      <div class="agent-card" style="--agent-color:#8b5cf6">
+        <div class="agent-icon">🧭</div>
+        <h3>My Travel Advisor</h3>
+        <p>Proposta di viaggio personalizzata in meno di 60 secondi, basata sulla storia del cliente.</p>
+        <span class="agent-tag">Consulenza</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#22e6c8">
+        <div class="agent-icon">🧾</div>
+        <h3>My Quotation Master</h3>
+        <p>Preventivi completi (volo+hotel+esperienze) in 5 minuti, con margine ottimizzato e PDF brandizzato.</p>
+        <span class="agent-tag">Vendita</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#ff4fa3">
+        <div class="agent-icon">💬</div>
+        <h3>My Client Care</h3>
+        <p>Risposte ai clienti, documenti di viaggio, assistenza e raccolta recensioni: automatico, ma umano.</p>
+        <span class="agent-tag">Post-vendita</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#5b8def">
+        <div class="agent-icon">🌍</div>
+        <h3>My Destination Expert</h3>
+        <p>Knowledge base viva su destinazioni, fornitori e normative: sa quello che a un neofita manca.</p>
+        <span class="agent-tag">Conoscenza</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#ffb84f">
+        <div class="agent-icon">📊</div>
+        <h3>My Business Coach</h3>
+        <p>Dashboard in tempo reale, analisi pipeline e consigli tattici per far crescere i tuoi numeri.</p>
+        <span class="agent-tag">Crescita</span>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Come funziona</h2>
+      <p>Dal primo accesso al primo preventivo venduto.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-num">1</div>
+        <div><h4>Attivi il Piano AI</h4><p>5 minuti, zero competenze tecniche richieste.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">2</div>
+        <div><h4>Configuri il profilo</h4><p>Brand, logo, specializzazione: i 5 agent si adattano a te.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">3</div>
+        <div><h4>Tutorial guidato</h4><p>15 minuti hands-on con My Travel Advisor.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">4</div>
+        <div><h4>Prima sessione live</h4><p>My Business Coach ti accompagna da subito sui primi obiettivi.</p></div>
+      </div>
+    </div>
+
+    <div class="pricing-card">
+      <span class="pill">AI Suite</span>
+      <div class="price">79€<span>/mese</span></div>
+      <p class="text-dim" style="font-size:13px;">Tutti i 5 AI Agent personali, illimitati. Margin share dal 55% al 75%.</p>
+      <div class="pricing-list">
+        <div><span class="check">✓</span> Preventivi e proposte illimitate</div>
+        <div><span class="check">✓</span> Client care automatizzato</div>
+        <div><span class="check">✓</span> Coaching settimanale sui numeri</div>
+        <div><span class="check">✓</span> Aggiornamenti AI continui</div>
+      </div>
+      <button class="btn btn-primary">Vedi tutti i moduli</button>
+    </div>
+
+    <div class="section-title">
+      <h2>Chi è già dentro</h2>
+    </div>
+    <div class="testi">
+      <div class="testi-card">
+        <p>"Ho fatto il mio primo preventivo serio il giorno 2. Senza My Quotation Master ci avrei messo una settimana."</p>
+        <div class="testi-who"><div class="avatar">GL</div><div><b>Giulia L.</b><span>Neofita, 3 mesi in YONDO</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"Zero capo, zero ufficio, 5 AI Agent. Sembra fantascienza ma funziona davvero."</p>
+        <div class="testi-who"><div class="avatar">MR</div><div><b>Marco R.</b><span>Consulente full digital</span></div></div>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2>Pronto a costruire il tuo studio digitale?</h2>
+      <p>Nessuna esperienza richiesta. Il team AI fa il resto.</p>
+      <button class="btn btn-primary">Diventa consulente YONDO</button>
+    </div>
+
+    <div class="footer-mini">YONDO © 2026 — Startup AI-First per Travel Consultant Digitali</div>
+  </div>
+
+  <div class="sticky-cta">
+    <button class="btn btn-primary" onclick="showScreen('dash')">Entra nella Dashboard →</button>
+  </div>
+</div>
+
+<!-- =====================================================
+     SCREEN 2 — DASHBOARD / AI AGENTS HUB
+     ===================================================== -->
+<div class="screen" id="screen-dash">
+  <div class="wrap" style="padding-bottom:90px;">
+
+    <div class="dash-top">
+      <div class="dash-greet">
+        <div class="eyebrow">Bentornata 👋</div>
+        <h1>Ciao Giulia</h1>
+      </div>
+      <div class="avatar-lg">GL</div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="num">€2.340</div><div class="lbl">Margine MTD</div><div class="delta up">▲ 18%</div></div>
+      <div class="kpi"><div class="num">7</div><div class="lbl">Preventivi attivi</div><div class="delta up">▲ 2</div></div>
+      <div class="kpi"><div class="num">94%</div><div class="lbl">Risposta clienti</div><div class="delta up">▲ stabile</div></div>
+      <div class="kpi"><div class="num">2</div><div class="lbl">Follow-up urgenti</div><div class="delta warn">⚠ oggi</div></div>
+    </div>
+
+    <div class="briefing">
+      <div class="ic">🤖</div>
+      <p><b>My Business Coach:</b> oggi hai 2 preventivi in scadenza e 1 cliente da richiamare per il follow-up viaggio Maldive. Priorità: chiudi la famiglia Bianchi prima di mezzogiorno.</p>
+    </div>
+
+    <div class="section-title" style="padding-top:22px;">
+      <h2>I tuoi 5 AI Agent</h2>
+      <p>Tocca un agente per aprire la chat.</p>
+    </div>
+
+    <div class="agents-grid">
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#8b5cf6">🧭</div>
+        <div class="info">
+          <h4>My Travel Advisor <span class="dot-status"></span></h4>
+          <p>Proposta pronta per "Famiglia Rossi — giugno"</p>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#22e6c8">🧾</div>
+        <div class="info">
+          <h4>My Quotation Master</h4>
+          <p>3 preventivi in attesa di invio</p>
+        </div>
+        <div class="notif-dot"></div>
+        <div class="chev">›</div>
+      </div>
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#ff4fa3">💬</div>
+        <div class="info">
+          <h4>My Client Care <span class="dot-status"></span></h4>
+          <p>5 richieste gestite automaticamente oggi</p>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#5b8def">🌍</div>
+        <div class="info">
+          <h4>My Destination Expert</h4>
+          <p>Nuovo aggiornamento: Giappone, stagione ciliegi</p>
+        </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#ffb84f">📊</div>
+        <div class="info">
+          <h4>My Business Coach <span class="dot-status"></span></h4>
+          <p>Nuovo consiglio tattico per questa settimana</p>
+        </div>
+        <div class="chev">›</div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <h2 style="font-size:16px;">Azioni rapide</h2>
+      <div class="qa-grid">
+        <div class="qa-item"><div class="ic">➕</div><span>Nuovo preventivo</span></div>
+        <div class="qa-item"><div class="ic">👤</div><span>Nuovo cliente</span></div>
+        <div class="qa-item"><div class="ic">📅</div><span>Calendario</span></div>
+        <div class="qa-item"><div class="ic">🎓</div><span>Corsi AI</span></div>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Attività recente</h2>
+    </div>
+    <div class="feed">
+      <div class="feed-item">
+        <div class="ic">🧾</div>
+        <div><p><b>My Quotation Master</b> ha generato il PDF per "Bianchi — Maldive, 7gg"</p><time>09:42</time></div>
+      </div>
+      <div class="feed-item">
+        <div class="ic">💬</div>
+        <div><p><b>My Client Care</b> ha risposto a una domanda su documenti per la Turchia</p><time>08:15</time></div>
+      </div>
+      <div class="feed-item">
+        <div class="ic">📊</div>
+        <div><p><b>My Business Coach</b>: margine settimanale +18% vs settimana scorsa</p><time>ieri</time></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active"><div class="ic">🏠</div>Home</div>
+    <div class="nav-item"><div class="ic">🤖</div>Agent</div>
+    <div class="fab">+</div>
+    <div class="nav-item"><div class="ic">🎓</div>Academy</div>
+    <div class="nav-item"><div class="ic">👤</div>Profilo</div>
+  </div>
+</div>
+
+<script>
+function showScreen(name){
+  document.getElementById('screen-home').classList.toggle('active', name==='home');
+  document.getElementById('screen-dash').classList.toggle('active', name==='dash');
+  document.getElementById('btn-home').classList.toggle('active', name==='home');
+  document.getElementById('btn-dash').classList.toggle('active', name==='dash');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
