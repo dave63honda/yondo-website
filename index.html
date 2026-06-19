@@ -24,12 +24,10 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{background:var(--bg); color:var(--text); font-family:'Sora',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; -webkit-font-smoothing:antialiased; scroll-behavior:smooth;}
   body{overflow-x:hidden;}
-
   a{color:inherit; text-decoration:none;}
   img{max-width:100%; display:block;}
   ::selection{background:var(--violet); color:#fff;}
 
-  /* ---------- Background ambience ---------- */
   .glow{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
     background:
@@ -41,18 +39,21 @@
   .noise{position:fixed; inset:0; z-index:-1; opacity:.035; pointer-events:none;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-  /* ---------- Top switcher (prototype nav, not part of real site) ---------- */
+  /* Top switcher — scrollabile per 5 voci */
   .proto-switch{
     position:fixed; top:10px; left:50%; transform:translateX(-50%);
     z-index:999; display:flex; gap:4px;
-    background:rgba(10,10,18,0.85); backdrop-filter:blur(12px);
+    background:rgba(10,10,18,0.88); backdrop-filter:blur(12px);
     border:1px solid var(--card-border); border-radius:999px; padding:4px;
     box-shadow:0 8px 30px rgba(0,0,0,0.45);
+    overflow-x:auto; scrollbar-width:none; max-width:calc(100vw - 32px);
+    white-space:nowrap;
   }
+  .proto-switch::-webkit-scrollbar{display:none;}
   .proto-switch button{
-    font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-dim);
-    background:transparent; border:none; padding:8px 16px; border-radius:999px; cursor:pointer;
-    transition:.25s;
+    font-family:inherit; font-size:12px; font-weight:600; color:var(--text-dim);
+    background:transparent; border:none; padding:7px 14px; border-radius:999px; cursor:pointer;
+    transition:.25s; white-space:nowrap; flex-shrink:0;
   }
   .proto-switch button.active{ color:#0a0a12; background:var(--grad); }
 
@@ -62,7 +63,7 @@
 
   .wrap{ max-width:480px; margin:0 auto; min-height:100vh; position:relative; padding-bottom:40px;}
 
-  /* ---------- Generic components ---------- */
+  /* Componenti generici */
   .pill{
     display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700;
     letter-spacing:.04em; text-transform:uppercase; color:var(--cyan);
@@ -77,27 +78,15 @@
   .btn-primary{ background:var(--grad); color:#0a0a12; box-shadow:0 10px 30px rgba(139,92,246,0.35); }
   .btn-ghost{ background:rgba(255,255,255,0.05); color:var(--text); border:1px solid var(--card-border); }
   .btn-sm{ width:auto; padding:10px 16px; font-size:13px; border-radius:10px; }
-
-  .card{
-    background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius);
-    padding:18px;
-  }
-
+  .card{ background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius); padding:18px; }
   .section-pad{ padding:0 20px; }
   h1,h2,h3{ font-weight:800; line-height:1.15; letter-spacing:-0.01em; }
   .eyebrow{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim); }
   .text-dim{ color:var(--text-dim); }
-  .grad-text{
-    background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
+  .grad-text{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
 
-  /* =====================================================
-     HOME / LANDING
-     ===================================================== */
-  .home-nav{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:18px 20px 6px;
-  }
+  /* ===================== HOME / LANDING ===================== */
+  .home-nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 20px 6px; }
   .logo{ display:flex; align-items:center; gap:8px; font-weight:800; font-size:18px; letter-spacing:-0.02em; }
   .logo-dot{ width:10px; height:10px; border-radius:50%; background:var(--grad); box-shadow:0 0 14px var(--cyan); }
   .burger{ width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; border:1px solid var(--card-border); }
@@ -125,17 +114,14 @@
   .agent-scroller{ display:flex; gap:14px; overflow-x:auto; padding:16px 20px 6px; scroll-snap-type:x mandatory; -ms-overflow-style:none; scrollbar-width:none; }
   .agent-scroller::-webkit-scrollbar{display:none;}
   .agent-card{
-    scroll-snap-align:start; min-width:240px; background:var(--card); border:1px solid var(--card-border);
+    scroll-snap-align:start; min-width:248px; background:var(--card); border:1px solid var(--card-border);
     border-radius:18px; padding:18px; position:relative; overflow:hidden;
   }
   .agent-card::before{
     content:''; position:absolute; top:-30%; right:-30%; width:120px; height:120px; border-radius:50%;
     filter:blur(10px); opacity:.35; background:var(--agent-color, var(--violet));
   }
-  .agent-icon{
-    width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center;
-    font-size:20px; margin-bottom:12px; background:var(--agent-color, var(--violet)); box-shadow:0 6px 18px rgba(0,0,0,0.4);
-  }
+  .agent-icon{ width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:12px; background:var(--agent-color, var(--violet)); box-shadow:0 6px 18px rgba(0,0,0,0.4); }
   .agent-card h3{ font-size:15.5px; margin-bottom:6px; }
   .agent-card p{ font-size:12.5px; color:var(--text-dim); line-height:1.5; }
   .agent-tag{ display:inline-block; margin-top:10px; font-size:10.5px; font-weight:700; color:var(--text); background:rgba(255,255,255,0.08); padding:4px 9px; border-radius:8px; }
@@ -158,9 +144,9 @@
   .pricing-list div{ font-size:13px; color:var(--text); display:flex; gap:8px; align-items:flex-start; }
   .check{ color:var(--cyan); font-weight:800; }
 
-  .testi{ display:flex; gap:14px; overflow-x:auto; padding:14px 20px 4px; scroll-snap-type:x mandatory;}
+  .testi{ display:flex; gap:14px; overflow-x:auto; padding:14px 20px 4px; scroll-snap-type:x mandatory; scrollbar-width:none; }
   .testi::-webkit-scrollbar{display:none;}
-  .testi-card{ scroll-snap-align:start; min-width:250px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; }
+  .testi-card{ scroll-snap-align:start; min-width:256px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; }
   .testi-card p{ font-size:13px; line-height:1.55; color:var(--text); margin-bottom:10px; }
   .testi-who{ display:flex; align-items:center; gap:8px; }
   .avatar{ width:30px; height:30px; border-radius:50%; background:var(--grad2); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#0a0a12; }
@@ -170,20 +156,18 @@
   .final-cta{ margin:30px 20px 10px; padding:26px; border-radius:24px; background:var(--grad); color:#0a0a12; position:relative; overflow:hidden; }
   .final-cta h2{ font-size:22px; color:#0a0a12; margin-bottom:8px; }
   .final-cta p{ font-size:13px; color:rgba(10,10,18,0.75); margin-bottom:16px; }
-  .final-cta .btn-primary{ background:#0a0a12; color:#fff; box-shadow:none; }
+  .final-cta .btn-dark{ background:#0a0a12; color:#fff; box-shadow:none; display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:inherit; font-weight:700; font-size:15px; border:none; cursor:pointer; padding:16px 22px; border-radius:14px; width:100%; }
 
   .footer-mini{ padding:24px 20px 0; text-align:center; color:var(--text-dim); font-size:11.5px; }
 
   .sticky-cta{
     position:sticky; bottom:0; left:0; right:0; z-index:50;
     padding:12px 20px calc(14px + var(--safe-bottom));
-    background:linear-gradient(to top, rgba(10,10,18,0.95), rgba(10,10,18,0));
+    background:linear-gradient(to top, rgba(10,10,18,0.97) 60%, rgba(10,10,18,0));
     backdrop-filter:blur(6px);
   }
 
-  /* =====================================================
-     DASHBOARD / AI AGENTS HUB
-     ===================================================== */
+  /* ===================== DASHBOARD ===================== */
   .dash-top{ padding:18px 20px 10px; display:flex; align-items:center; justify-content:space-between; }
   .dash-greet .eyebrow{ color:var(--cyan); }
   .dash-greet h1{ font-size:21px; margin-top:4px; }
@@ -197,24 +181,15 @@
   .kpi .delta{ font-size:10.5px; font-weight:700; margin-top:6px; }
   .delta.up{ color:var(--cyan); } .delta.warn{ color:var(--amber); }
 
-  .briefing{
-    margin:16px 20px 4px; padding:16px; border-radius:18px; display:flex; gap:12px; align-items:flex-start;
-    background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.3);
-  }
+  .briefing{ margin:16px 20px 4px; padding:16px; border-radius:18px; display:flex; gap:12px; align-items:flex-start; background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.3); }
   .briefing .ic{ font-size:20px; }
   .briefing p{ font-size:12.5px; line-height:1.55; color:var(--text); }
   .briefing b{ color:var(--cyan); }
 
   .agents-grid{ padding:18px 20px 6px; display:flex; flex-direction:column; gap:12px; }
-  .agent-row{
-    display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--card-border);
-    border-radius:18px; padding:14px; position:relative;
-  }
+  .agent-row{ display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--card-border); border-radius:18px; padding:14px; position:relative; }
   .agent-row:active{ transform:scale(0.98); }
-  .agent-row .ic-box{
-    width:48px; height:48px; border-radius:14px; flex:none; display:flex; align-items:center; justify-content:center;
-    font-size:22px; background:var(--agent-color, var(--violet));
-  }
+  .agent-row .ic-box{ width:48px; height:48px; border-radius:14px; flex:none; display:flex; align-items:center; justify-content:center; font-size:22px; background:var(--agent-color, var(--violet)); }
   .agent-row .info{ flex:1; min-width:0; }
   .agent-row .info h4{ font-size:14.5px; margin-bottom:2px; display:flex; align-items:center; gap:6px;}
   .agent-row .info p{ font-size:12px; color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -224,7 +199,7 @@
 
   .quick-actions{ padding:6px 20px 4px; }
   .qa-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px; }
-  .qa-item{ background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:12px 6px; text-align:center; }
+  .qa-item{ background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:12px 6px; text-align:center; cursor:pointer; }
   .qa-item .ic{ font-size:18px; margin-bottom:6px; }
   .qa-item span{ font-size:10px; color:var(--text-dim); }
 
@@ -239,7 +214,7 @@
     background:rgba(15,15,23,0.92); backdrop-filter:blur(16px); border-top:1px solid var(--card-border);
     display:flex; padding:8px 6px calc(8px + var(--safe-bottom));
   }
-  .nav-item{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; color:var(--text-dim); font-size:10px; font-weight:600; border-radius:12px; }
+  .nav-item{ flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; padding:6px 0; color:var(--text-dim); font-size:10px; font-weight:600; border-radius:12px; cursor:pointer; }
   .nav-item.active{ color:var(--cyan); }
   .nav-item .ic{ font-size:18px; }
   .fab{
@@ -248,6 +223,116 @@
     display:flex; align-items:center; justify-content:center; font-size:24px; color:#0a0a12;
     box-shadow:0 8px 24px rgba(139,92,246,0.5); border:4px solid var(--bg);
   }
+
+  /* ===================== PREZZI ===================== */
+  .pricing-page-header{ padding:24px 20px 8px; }
+  .pricing-page-header h1{ font-size:28px; margin-top:10px; }
+  .pricing-page-header p{ font-size:14px; color:var(--text-dim); margin-top:8px; line-height:1.5; }
+
+  .plan-card-main{
+    margin:18px 20px; padding:26px; border-radius:24px;
+    background:linear-gradient(160deg, rgba(139,92,246,0.2), rgba(34,230,200,0.08));
+    border:1px solid rgba(139,92,246,0.4); position:relative; overflow:hidden;
+  }
+  .plan-card-main::before{
+    content:''; position:absolute; top:-60px; right:-60px; width:160px; height:160px; border-radius:50%;
+    background:var(--grad); opacity:.1; filter:blur(30px); pointer-events:none;
+  }
+  .badge-best{ display:inline-block; font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; background:var(--grad); color:#0a0a12; padding:4px 10px; border-radius:999px; margin-bottom:10px; }
+  .plan-name{ font-size:20px; font-weight:800; }
+  .plan-price-big{ font-size:42px; font-weight:800; line-height:1; margin:10px 0 4px; }
+  .plan-price-big span{ font-size:16px; color:var(--text-dim); font-weight:600; }
+  .plan-trial{ font-size:12.5px; color:var(--cyan); font-weight:700; margin-bottom:16px; }
+  .plan-features{ display:flex; flex-direction:column; gap:10px; margin:18px 0; }
+  .plan-features div{ font-size:13px; color:var(--text); display:flex; gap:10px; align-items:flex-start; }
+  .plan-features .check{ color:var(--cyan); font-weight:800; margin-top:1px; flex:none; }
+  .plan-note{ font-size:11.5px; color:var(--text-dim); margin-top:12px; text-align:center; }
+
+  .addons-section{ padding:0 20px; }
+  .addons-section h2{ font-size:18px; margin-bottom:4px; }
+  .addons-sub{ font-size:13px; color:var(--text-dim); margin-bottom:16px; }
+  .addon-card{ background:var(--card); border:1px solid var(--card-border); border-radius:18px; padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:14px; }
+  .addon-ic{ font-size:24px; flex:none; }
+  .addon-info{ flex:1; }
+  .addon-info h4{ font-size:14px; font-weight:700; margin-bottom:3px; }
+  .addon-info p{ font-size:12px; color:var(--text-dim); line-height:1.4; }
+  .addon-price{ font-size:14px; font-weight:800; color:var(--violet); white-space:nowrap; }
+
+  .faq-section{ padding:24px 20px 10px; }
+  .faq-section h2{ font-size:18px; margin-bottom:14px; }
+  .faq-item{ border-bottom:1px solid var(--card-border); padding:14px 0; }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-q{ font-size:13.5px; font-weight:700; margin-bottom:6px; color:var(--text); }
+  .faq-a{ font-size:12.5px; color:var(--text-dim); line-height:1.55; }
+
+  /* ===================== ACADEMY ===================== */
+  .academy-header{ padding:22px 20px 10px; }
+  .academy-header h1{ font-size:26px; margin:10px 0 6px; }
+  .progress-bar-wrap{ margin:16px 20px; }
+  .progress-bar-wrap .pb-label{ font-size:12px; color:var(--text-dim); margin-bottom:6px; display:flex; justify-content:space-between; }
+  .pb-label strong{ color:var(--cyan); }
+  .progress-bar{ height:6px; background:rgba(255,255,255,0.08); border-radius:999px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--grad); border-radius:999px; }
+
+  .course-section{ padding:4px 20px; }
+  .course-section h3{ font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); margin:20px 0 10px; }
+  .course-item{ display:flex; gap:14px; align-items:center; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:14px; margin-bottom:10px; }
+  .course-item.done{ border-color:rgba(34,230,200,0.25); }
+  .course-item.active-course{ border-color:rgba(139,92,246,0.4); background:rgba(139,92,246,0.05); }
+  .course-item.locked{ opacity:.5; }
+  .course-ic{ width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; font-size:20px; flex:none; }
+  .course-ic.done-ic{ background:rgba(34,230,200,0.12); }
+  .course-ic.active-ic{ background:rgba(139,92,246,0.18); }
+  .course-info{ flex:1; min-width:0; }
+  .course-info h4{ font-size:14px; font-weight:700; margin-bottom:3px; }
+  .course-info span{ font-size:11.5px; color:var(--text-dim); }
+  .course-status{ font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px; flex:none; white-space:nowrap; }
+  .status-done{ background:rgba(34,230,200,0.12); color:var(--cyan); }
+  .status-active{ background:rgba(139,92,246,0.18); color:var(--violet); }
+  .status-lock{ background:rgba(255,255,255,0.05); color:var(--text-dim); }
+  .status-start{ background:rgba(255,255,255,0.07); color:var(--text); }
+
+  .badge-row{ display:flex; gap:12px; overflow-x:auto; padding:6px 20px 14px; scrollbar-width:none; }
+  .badge-row::-webkit-scrollbar{display:none;}
+  .badge-pill{ flex:none; display:flex; flex-direction:column; align-items:center; gap:6px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:14px 16px; min-width:80px; }
+  .badge-pill .b-ic{ font-size:24px; }
+  .badge-pill span{ font-size:10px; color:var(--text-dim); text-align:center; line-height:1.3; }
+  .badge-pill.earned{ border-color:rgba(255,184,79,0.35); background:rgba(255,184,79,0.07); }
+  .badge-pill.earned span{ color:var(--amber); }
+
+  /* ===================== ISCRIVITI (FUNNEL) ===================== */
+  .signup-wrap{ padding:28px 20px 30px; }
+  .step-indicator{ display:flex; gap:6px; margin-bottom:28px; }
+  .step-dot{ flex:1; height:4px; border-radius:999px; background:rgba(255,255,255,0.1); transition:.3s; }
+  .step-dot.active{ background:var(--grad); }
+  .step-dot.done{ background:rgba(34,230,200,0.5); }
+
+  .signup-step{ display:none; }
+  .signup-step.active{ display:block; animation:fadeIn .3s ease; }
+  .signup-step h2{ font-size:26px; margin-bottom:8px; }
+  .signup-step .sub{ font-size:14px; color:var(--text-dim); margin-bottom:24px; line-height:1.5; }
+
+  .form-field{ margin-bottom:16px; }
+  .form-field label{ font-size:12px; font-weight:700; color:var(--text-dim); display:block; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+  .form-field input{ width:100%; background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:14px 16px; color:var(--text); font-family:inherit; font-size:15px; outline:none; transition:.2s; }
+  .form-field input:focus{ border-color:var(--violet); box-shadow:0 0 0 3px rgba(139,92,246,0.15); }
+  .form-field input::placeholder{ color:var(--text-dim); }
+
+  .option-cards{ display:flex; flex-direction:column; gap:10px; }
+  .option-card{ background:var(--card); border:2px solid var(--card-border); border-radius:16px; padding:16px; cursor:pointer; transition:.2s; display:flex; align-items:flex-start; gap:14px; }
+  .option-card:active{ transform:scale(0.98); }
+  .option-card.selected{ border-color:var(--violet); background:rgba(139,92,246,0.1); }
+  .option-card .oc-ic{ font-size:24px; flex:none; margin-top:2px; }
+  .option-card h4{ font-size:14px; font-weight:700; margin-bottom:2px; }
+  .option-card p{ font-size:12px; color:var(--text-dim); line-height:1.4; }
+
+  .confirm-box{ background:var(--card); border:1px solid rgba(34,230,200,0.3); border-radius:22px; padding:28px; text-align:center; }
+  .confirm-box .big-ic{ font-size:52px; margin-bottom:14px; }
+  .confirm-box h3{ font-size:22px; margin-bottom:10px; }
+  .confirm-box p{ font-size:13.5px; color:var(--text-dim); line-height:1.65; }
+  .confirm-box .email-highlight{ color:var(--cyan); font-weight:700; }
+
+  .back-btn{ display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text-dim); background:none; border:none; font-family:inherit; cursor:pointer; padding:0 0 18px; }
 
   @media (min-width:560px){
     .wrap{ border-left:1px solid var(--card-border); border-right:1px solid var(--card-border); }
@@ -259,8 +344,11 @@
 <div class="noise"></div>
 
 <div class="proto-switch">
-  <button id="btn-home" class="active" onclick="showScreen('home')">Home</button>
-  <button id="btn-dash" onclick="showScreen('dash')">Dashboard</button>
+  <button id="btn-home" class="active" onclick="showScreen('home')">🏠 Home</button>
+  <button id="btn-dash" onclick="showScreen('dash')">📊 Dashboard</button>
+  <button id="btn-prezzi" onclick="showScreen('prezzi')">💳 Prezzi</button>
+  <button id="btn-academy" onclick="showScreen('academy')">🎓 Academy</button>
+  <button id="btn-signup" onclick="showScreen('signup')">✨ Iscriviti</button>
 </div>
 
 <!-- =====================================================
@@ -275,21 +363,21 @@
     </div>
 
     <div class="hero">
-      <span class="pill">● 5 AI Agent, zero stress</span>
+      <span class="pill">● Startup AI-First — Travel Consultant</span>
       <h1>Diventa un <span class="grad-text">travel consultant AI-powered</span>. Da zero a operativo in 30 giorni.</h1>
-      <p>YONDO ti dà un team di 5 AI Agent personali che fanno preventivi, rispondono ai clienti, trovano destinazioni e ti coachano sui numeri — così tu vendi, e basta.</p>
-      <button class="btn btn-primary">Inizia ora — è gratis 🚀</button>
+      <p>YONDO ti affianca con 5 AI Agent personali che fanno preventivi, rispondono ai clienti, trovano destinazioni e ti coachano sui numeri — così tu vendi, e basta.</p>
+      <button class="btn btn-primary" onclick="showScreen('signup')">Prova gratis 14 giorni →</button>
       <div class="hero-badges">
         <div class="badge-mini">⚡ <b>60 sec</b> per proposta</div>
         <div class="badge-mini">🤖 <b>24/7</b> operativi</div>
-        <div class="badge-mini">📈 <b>75%</b> margin share</div>
+        <div class="badge-mini">📈 fino al <b>75%</b> di margine</div>
       </div>
     </div>
 
     <div class="stats-row">
       <div class="stat"><div class="num">5</div><div class="lbl">AI Agent</div></div>
       <div class="stat"><div class="num">0</div><div class="lbl">Capo umano</div></div>
-      <div class="stat"><div class="num">79€</div><div class="lbl">AI Suite/mese</div></div>
+      <div class="stat"><div class="num">79€</div><div class="lbl">al mese</div></div>
       <div class="stat"><div class="num">24/7</div><div class="lbl">Sempre attivi</div></div>
     </div>
 
@@ -302,31 +390,31 @@
       <div class="agent-card" style="--agent-color:#8b5cf6">
         <div class="agent-icon">🧭</div>
         <h3>My Travel Advisor</h3>
-        <p>Proposta di viaggio personalizzata in meno di 60 secondi, basata sulla storia del cliente.</p>
+        <p>Inserisci le preferenze del cliente: lui struttura destinazione, itinerario, ritmo ed esperienze in meno di 60 secondi. Come avere un collega senior sempre disponibile.</p>
         <span class="agent-tag">Consulenza</span>
       </div>
       <div class="agent-card" style="--agent-color:#22e6c8">
         <div class="agent-icon">🧾</div>
         <h3>My Quotation Master</h3>
-        <p>Preventivi completi (volo+hotel+esperienze) in 5 minuti, con margine ottimizzato e PDF brandizzato.</p>
+        <p>Assembla volo + hotel + trasferimenti + esperienze in un preventivo con il tuo logo e margine ottimizzato. PDF pronto da inviare in 5 minuti, ogni volta.</p>
         <span class="agent-tag">Vendita</span>
       </div>
       <div class="agent-card" style="--agent-color:#ff4fa3">
         <div class="agent-icon">💬</div>
         <h3>My Client Care</h3>
-        <p>Risposte ai clienti, documenti di viaggio, assistenza e raccolta recensioni: automatico, ma umano.</p>
+        <p>Risponde H24, invia documenti di viaggio, gestisce le domande post-vendita e raccoglie recensioni. I tuoi clienti si sentono sempre seguiti — senza svegliarti alle 23.</p>
         <span class="agent-tag">Post-vendita</span>
       </div>
       <div class="agent-card" style="--agent-color:#5b8def">
         <div class="agent-icon">🌍</div>
         <h3>My Destination Expert</h3>
-        <p>Knowledge base viva su destinazioni, fornitori e normative: sa quello che a un neofita manca.</p>
+        <p>Knowledge base viva su 150+ destinazioni, fornitori, normative visti e compagnie aeree. Aggiornata ogni settimana: la memoria da esperto che un neofita non ha ancora.</p>
         <span class="agent-tag">Conoscenza</span>
       </div>
       <div class="agent-card" style="--agent-color:#ffb84f">
         <div class="agent-icon">📊</div>
         <h3>My Business Coach</h3>
-        <p>Dashboard in tempo reale, analisi pipeline e consigli tattici per far crescere i tuoi numeri.</p>
+        <p>Monitora il tuo margine in tempo reale, ti avvisa quando un lead raffredda e ogni lunedì ti manda le 3 azioni prioritarie per aumentare i ricavi quella settimana.</p>
         <span class="agent-tag">Crescita</span>
       </div>
     </div>
@@ -338,60 +426,77 @@
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-num">1</div>
-        <div><h4>Attivi il Piano AI</h4><p>5 minuti, zero competenze tecniche richieste.</p></div>
+        <div><h4>Completi la registrazione</h4><p>2 minuti, dati base, nessuna competenza tecnica. Accesso immediato alla dashboard e ai 5 Agent personali.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">2</div>
-        <div><h4>Configuri il profilo</h4><p>Brand, logo, specializzazione: i 5 agent si adattano a te.</p></div>
+        <div><h4>Configuri il tuo profilo</h4><p>Logo, brand, specializzazioni di destinazione: i 5 Agent diventano tuoi, con il tuo stile e il tuo nome.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">3</div>
-        <div><h4>Tutorial guidato</h4><p>15 minuti hands-on con My Travel Advisor.</p></div>
+        <div><h4>Prima proposta reale</h4><p>15 minuti hands-on con My Travel Advisor: inserisci un cliente vero e guarda la proposta uscire in meno di 60 secondi.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">4</div>
-        <div><h4>Prima sessione live</h4><p>My Business Coach ti accompagna da subito sui primi obiettivi.</p></div>
+        <div><h4>Sei operativo</h4><p>My Business Coach analizza il tuo pipeline e ti assegna gli obiettivi della prima settimana. Niente improvvisazione: solo azioni misurate.</p></div>
       </div>
     </div>
 
     <div class="pricing-card">
       <span class="pill">AI Suite</span>
       <div class="price">79€<span>/mese</span></div>
-      <p class="text-dim" style="font-size:13px;">Tutti i 5 AI Agent personali, illimitati. Margin share dal 55% al 75%.</p>
+      <p class="text-dim" style="font-size:13px; margin-bottom:4px;">Tutti i 5 AI Agent personali, utilizzo illimitato. 14 giorni gratis per iniziare.</p>
       <div class="pricing-list">
-        <div><span class="check">✓</span> Preventivi e proposte illimitate</div>
-        <div><span class="check">✓</span> Client care automatizzato</div>
+        <div><span class="check">✓</span> Preventivi e proposte illimitati</div>
+        <div><span class="check">✓</span> Client care automatizzato H24</div>
+        <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
+        <div><span class="check">✓</span> PDF preventivi con il tuo logo</div>
         <div><span class="check">✓</span> Coaching settimanale sui numeri</div>
-        <div><span class="check">✓</span> Aggiornamenti AI continui</div>
+        <div><span class="check">✓</span> Margin share dal 55% al 75%</div>
+        <div><span class="check">✓</span> Academy completa inclusa</div>
+        <div><span class="check">✓</span> Nessun contratto annuale</div>
       </div>
-      <button class="btn btn-primary">Vedi tutti i moduli</button>
+      <button class="btn btn-primary" onclick="showScreen('prezzi')">Vedi tutti i moduli →</button>
     </div>
 
     <div class="section-title">
       <h2>Chi è già dentro</h2>
+      <p>Storie reali di chi ha scelto YONDO.</p>
     </div>
     <div class="testi">
       <div class="testi-card">
-        <p>"Ho fatto il mio primo preventivo serio il giorno 2. Senza My Quotation Master ci avrei messo una settimana."</p>
-        <div class="testi-who"><div class="avatar">GL</div><div><b>Giulia L.</b><span>Neofita, 3 mesi in YONDO</span></div></div>
+        <p>"Ho fatto il mio primo preventivo serio il giorno 2. Senza My Quotation Master ci avrei messo una settimana intera."</p>
+        <div class="testi-who"><div class="avatar">GL</div><div><b>Giulia L.</b><span>3 mesi in YONDO</span></div></div>
       </div>
       <div class="testi-card">
-        <p>"Zero capo, zero ufficio, 5 AI Agent. Sembra fantascienza ma funziona davvero."</p>
+        <p>"Zero capo, zero ufficio, 5 AI Agent. Sembrava fantascienza — ora è la mia quotidianità lavorativa."</p>
         <div class="testi-who"><div class="avatar">MR</div><div><b>Marco R.</b><span>Consulente full digital</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"Al terzo mese avevo già superato i 2.000€ di margine. My Business Coach mi ha detto esattamente dove concentrarmi."</p>
+        <div class="testi-who"><div class="avatar">SF</div><div><b>Sara F.</b><span>Ex impiegata, ora freelance</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"Lavoro da casa, scelgo gli orari. My Client Care risponde ai clienti mentre dormo — letteralmente."</p>
+        <div class="testi-who"><div class="avatar">LP</div><div><b>Luca P.</b><span>Nomade digitale, 1 anno in YONDO</span></div></div>
+      </div>
+      <div class="testi-card">
+        <p>"Non sapevo nulla di travel. In 30 giorni My Destination Expert mi ha resa più preparata del 90% dei colleghi."</p>
+        <div class="testi-who"><div class="avatar">AC</div><div><b>Alessia C.</b><span>Neofita, partita da zero</span></div></div>
       </div>
     </div>
 
     <div class="final-cta">
       <h2>Pronto a costruire il tuo studio digitale?</h2>
-      <p>Nessuna esperienza richiesta. Il team AI fa il resto.</p>
-      <button class="btn btn-primary">Diventa consulente YONDO</button>
+      <p>Nessuna esperienza richiesta. Il team AI fa il resto. 14 giorni gratis, poi 79€/mese.</p>
+      <button class="btn-dark" onclick="showScreen('signup')">Inizia la prova gratuita →</button>
     </div>
 
-    <div class="footer-mini">YONDO © 2026 — Startup AI-First per Travel Consultant Digitali</div>
+    <div class="footer-mini">YONDO © 2026 — Startup AI-First per Travel Consultant Digitali<br><br></div>
   </div>
 
   <div class="sticky-cta">
-    <button class="btn btn-primary" onclick="showScreen('dash')">Entra nella Dashboard →</button>
+    <button class="btn btn-primary" onclick="showScreen('signup')">Prova gratis 14 giorni →</button>
   </div>
 </div>
 
@@ -404,21 +509,21 @@
     <div class="dash-top">
       <div class="dash-greet">
         <div class="eyebrow">Bentornata 👋</div>
-        <h1>Ciao Giulia</h1>
+        <h1>Ciao, Giulia</h1>
       </div>
       <div class="avatar-lg">GL</div>
     </div>
 
     <div class="kpi-row">
-      <div class="kpi"><div class="num">€2.340</div><div class="lbl">Margine MTD</div><div class="delta up">▲ 18%</div></div>
-      <div class="kpi"><div class="num">7</div><div class="lbl">Preventivi attivi</div><div class="delta up">▲ 2</div></div>
-      <div class="kpi"><div class="num">94%</div><div class="lbl">Risposta clienti</div><div class="delta up">▲ stabile</div></div>
+      <div class="kpi"><div class="num">€2.340</div><div class="lbl">Margine MTD</div><div class="delta up">▲ +18%</div></div>
+      <div class="kpi"><div class="num">7</div><div class="lbl">Preventivi attivi</div><div class="delta up">▲ +2</div></div>
+      <div class="kpi"><div class="num">94%</div><div class="lbl">Risposta clienti</div><div class="delta up">● stabile</div></div>
       <div class="kpi"><div class="num">2</div><div class="lbl">Follow-up urgenti</div><div class="delta warn">⚠ oggi</div></div>
     </div>
 
     <div class="briefing">
       <div class="ic">🤖</div>
-      <p><b>My Business Coach:</b> oggi hai 2 preventivi in scadenza e 1 cliente da richiamare per il follow-up viaggio Maldive. Priorità: chiudi la famiglia Bianchi prima di mezzogiorno.</p>
+      <p><b>My Business Coach:</b> hai 2 preventivi in scadenza oggi e la famiglia Bianchi aspetta risposta per le Maldive. <b>Priorità:</b> chiudi entro mezzogiorno — margine stimato €420.</p>
     </div>
 
     <div class="section-title" style="padding-top:22px;">
@@ -431,7 +536,7 @@
         <div class="ic-box" style="--agent-color:#8b5cf6">🧭</div>
         <div class="info">
           <h4>My Travel Advisor <span class="dot-status"></span></h4>
-          <p>Proposta pronta per "Famiglia Rossi — giugno"</p>
+          <p>Proposta pronta — Famiglia Rossi, Giappone giugno</p>
         </div>
         <div class="chev">›</div>
       </div>
@@ -456,7 +561,7 @@
         <div class="ic-box" style="--agent-color:#5b8def">🌍</div>
         <div class="info">
           <h4>My Destination Expert</h4>
-          <p>Nuovo aggiornamento: Giappone, stagione ciliegi</p>
+          <p>Aggiornamento: Giappone, stagione ciliegi 2027</p>
         </div>
         <div class="chev">›</div>
       </div>
@@ -464,7 +569,7 @@
         <div class="ic-box" style="--agent-color:#ffb84f">📊</div>
         <div class="info">
           <h4>My Business Coach <span class="dot-status"></span></h4>
-          <p>Nuovo consiglio tattico per questa settimana</p>
+          <p>3 azioni prioritarie per questa settimana</p>
         </div>
         <div class="chev">›</div>
       </div>
@@ -476,7 +581,7 @@
         <div class="qa-item"><div class="ic">➕</div><span>Nuovo preventivo</span></div>
         <div class="qa-item"><div class="ic">👤</div><span>Nuovo cliente</span></div>
         <div class="qa-item"><div class="ic">📅</div><span>Calendario</span></div>
-        <div class="qa-item"><div class="ic">🎓</div><span>Corsi AI</span></div>
+        <div class="qa-item" onclick="showScreen('academy')"><div class="ic">🎓</div><span>Academy</span></div>
       </div>
     </div>
 
@@ -486,15 +591,19 @@
     <div class="feed">
       <div class="feed-item">
         <div class="ic">🧾</div>
-        <div><p><b>My Quotation Master</b> ha generato il PDF per "Bianchi — Maldive, 7gg"</p><time>09:42</time></div>
+        <div><p><b>My Quotation Master</b> ha generato il PDF "Bianchi — Maldive 7gg" con margine stimato €420</p><time>09:42</time></div>
       </div>
       <div class="feed-item">
         <div class="ic">💬</div>
-        <div><p><b>My Client Care</b> ha risposto a una domanda su documenti per la Turchia</p><time>08:15</time></div>
+        <div><p><b>My Client Care</b> ha risposto a 3 domande su documenti di viaggio per la Turchia</p><time>08:15</time></div>
+      </div>
+      <div class="feed-item">
+        <div class="ic">🌍</div>
+        <div><p><b>My Destination Expert</b> ha aggiornato la scheda Giappone: nuovi fornitori stagione primaverile</p><time>ieri 18:00</time></div>
       </div>
       <div class="feed-item">
         <div class="ic">📊</div>
-        <div><p><b>My Business Coach</b>: margine settimanale +18% vs settimana scorsa</p><time>ieri</time></div>
+        <div><p><b>My Business Coach</b>: margine settimanale +18% rispetto alla settimana scorsa</p><time>ieri 08:00</time></div>
       </div>
     </div>
   </div>
@@ -503,18 +612,434 @@
     <div class="nav-item active"><div class="ic">🏠</div>Home</div>
     <div class="nav-item"><div class="ic">🤖</div>Agent</div>
     <div class="fab">+</div>
-    <div class="nav-item"><div class="ic">🎓</div>Academy</div>
+    <div class="nav-item" onclick="showScreen('academy')"><div class="ic">🎓</div>Academy</div>
     <div class="nav-item"><div class="ic">👤</div>Profilo</div>
+  </div>
+</div>
+
+<!-- =====================================================
+     SCREEN 3 — PREZZI
+     ===================================================== -->
+<div class="screen" id="screen-prezzi">
+  <div class="wrap">
+
+    <div class="pricing-page-header">
+      <span class="pill">Trasparenza totale</span>
+      <h1>Un piano chiaro,<br><span class="grad-text">zero sorprese</span></h1>
+      <p>Tutto ciò che ti serve per essere operativo come travel consultant AI-powered, dal giorno uno.</p>
+    </div>
+
+    <div class="plan-card-main">
+      <div class="badge-best">Piano consigliato</div>
+      <div class="plan-name">AI Suite</div>
+      <div class="plan-price-big">79€<span>/mese</span></div>
+      <div class="plan-trial">✦ 14 giorni gratis — nessuna carta richiesta</div>
+      <div class="plan-features">
+        <div><span class="check">✓</span> Tutti i 5 AI Agent personali, illimitati</div>
+        <div><span class="check">✓</span> Preventivi e proposte senza limiti</div>
+        <div><span class="check">✓</span> PDF brandizzati con il tuo logo</div>
+        <div><span class="check">✓</span> Client care automatizzato H24</div>
+        <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
+        <div><span class="check">✓</span> Coaching settimanale sui numeri</div>
+        <div><span class="check">✓</span> Margin share dal 55% al 75%</div>
+        <div><span class="check">✓</span> Aggiornamenti AI continui inclusi</div>
+        <div><span class="check">✓</span> Supporto prioritario via WhatsApp</div>
+        <div><span class="check">✓</span> Accesso completo all'Academy</div>
+        <div><span class="check">✓</span> Cancelli quando vuoi, senza penali</div>
+      </div>
+      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia gratis 14 giorni →</button>
+      <p class="plan-note">Dopo i 14 giorni, 79€/mese. Puoi cancellare in qualsiasi momento.</p>
+    </div>
+
+    <div class="addons-section">
+      <h2>Moduli aggiuntivi</h2>
+      <p class="addons-sub">Potenzia il tuo studio con strumenti di marketing AI. Attivabili e disattivabili quando vuoi, senza vincoli.</p>
+
+      <div class="addon-card">
+        <div class="addon-ic">🎯</div>
+        <div class="addon-info">
+          <h4>AI Ads Manager</h4>
+          <p>Campagne Meta e Google gestite dall'AI. Target, creatività e budget ottimizzati automaticamente.</p>
+        </div>
+        <div class="addon-price">+29€/m</div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-ic">📱</div>
+        <div class="addon-info">
+          <h4>AI Social Content</h4>
+          <p>Post, Reel e Stories pronti ogni settimana, brandizzati con il tuo stile e le tue destinazioni.</p>
+        </div>
+        <div class="addon-price">+19€/m</div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-ic">✉️</div>
+        <div class="addon-info">
+          <h4>AI Email Campaign</h4>
+          <p>Newsletter e DEM automatizzate verso i tuoi contatti. Tasso di apertura medio: 38%.</p>
+        </div>
+        <div class="addon-price">+19€/m</div>
+      </div>
+
+      <div class="addon-card">
+        <div class="addon-ic">🌐</div>
+        <div class="addon-info">
+          <h4>Website Pro</h4>
+          <p>Sito vetrina professionale con richiesta preventivo integrata e SEO ottimizzato. Pronto in 24h.</p>
+        </div>
+        <div class="addon-price">+39€/m</div>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <h2>Domande frequenti</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Devo avere esperienza nel travel?</div>
+        <div class="faq-a">No. I tuoi 5 AI Agent ti guidano in ogni aspetto del lavoro. L'Academy inclusa ti porta da zero a operativo in meno di 30 giorni.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso cancellare quando voglio?</div>
+        <div class="faq-a">Sì. Nessun contratto annuale, nessuna penale. Cancelli dalla dashboard con un click e non ti addebitiamo più nulla.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Come funziona il margin share?</div>
+        <div class="faq-a">Hai dal 55% al 75% del margine netto su ogni prenotazione venduta attraverso i fornitori YONDO. La percentuale cresce con il volume mensile.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">I 5 Agent sono davvero "miei"?</div>
+        <div class="faq-a">Sì: imparano il tuo stile, il tuo brand e i tuoi clienti. Non condividi nulla con altri consulenti — è una AI suite privata, dedicata a te.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Cosa succede dopo i 14 giorni gratis?</div>
+        <div class="faq-a">Ricevi un promemoria email 3 giorni prima della scadenza. Se vuoi continuare, attivi il pagamento. Altrimenti l'account si mette in pausa automaticamente — nessun addebito.</div>
+      </div>
+    </div>
+
+    <div style="padding:10px 20px 20px;">
+      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia gratis — 14 giorni →</button>
+    </div>
+
+    <div class="footer-mini">YONDO © 2026<br><br></div>
+  </div>
+</div>
+
+<!-- =====================================================
+     SCREEN 4 — ACADEMY
+     ===================================================== -->
+<div class="screen" id="screen-academy">
+  <div class="wrap" style="padding-bottom:30px;">
+
+    <div class="academy-header">
+      <span class="pill">🎓 La tua formazione</span>
+      <h1>YONDO <span class="grad-text">Academy</span></h1>
+      <p class="text-dim" style="font-size:13.5px; margin-top:6px; line-height:1.5;">Da neofita a professionista certificato, un passo alla volta.</p>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="pb-label"><span>Percorso completato</span><strong>2 / 6 lezioni</strong></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+    </div>
+
+    <div class="course-section">
+
+      <h3>Percorso base — Operatività</h3>
+
+      <div class="course-item done">
+        <div class="course-ic done-ic">✅</div>
+        <div class="course-info">
+          <h4>Benvenuto in YONDO</h4>
+          <span>5 min · Completato</span>
+        </div>
+        <div class="course-status status-done">Fatto</div>
+      </div>
+
+      <div class="course-item done">
+        <div class="course-ic done-ic">✅</div>
+        <div class="course-info">
+          <h4>I tuoi 5 AI Agent spiegati</h4>
+          <span>12 min · Completato</span>
+        </div>
+        <div class="course-status status-done">Fatto</div>
+      </div>
+
+      <div class="course-item active-course">
+        <div class="course-ic active-ic">▶️</div>
+        <div class="course-info">
+          <h4>Prima proposta con My Travel Advisor</h4>
+          <span>15 min · In corso</span>
+        </div>
+        <div class="course-status status-active">In corso</div>
+      </div>
+
+      <div class="course-item locked">
+        <div class="course-ic">🔒</div>
+        <div class="course-info">
+          <h4>Preventivo pro con Quotation Master</h4>
+          <span>20 min</span>
+        </div>
+        <div class="course-status status-lock">Bloccato</div>
+      </div>
+
+      <div class="course-item locked">
+        <div class="course-ic">🔒</div>
+        <div class="course-info">
+          <h4>Gestire i clienti con Client Care</h4>
+          <span>18 min</span>
+        </div>
+        <div class="course-status status-lock">Bloccato</div>
+      </div>
+
+      <div class="course-item locked">
+        <div class="course-ic">🔒</div>
+        <div class="course-info">
+          <h4>Crescere con My Business Coach</h4>
+          <span>25 min</span>
+        </div>
+        <div class="course-status status-lock">Bloccato</div>
+      </div>
+
+      <h3>Specializzazioni Destinazioni</h3>
+
+      <div class="course-item">
+        <div class="course-ic">🌊</div>
+        <div class="course-info">
+          <h4>Maldive &amp; Oceano Indiano</h4>
+          <span>3 lezioni · 45 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+      <div class="course-item">
+        <div class="course-ic">🗾</div>
+        <div class="course-info">
+          <h4>Giappone &amp; Far East</h4>
+          <span>4 lezioni · 60 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+      <div class="course-item">
+        <div class="course-ic">🌴</div>
+        <div class="course-info">
+          <h4>Caraibi &amp; America Latina</h4>
+          <span>3 lezioni · 50 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+      <div class="course-item">
+        <div class="course-ic">🏔️</div>
+        <div class="course-info">
+          <h4>Avventura &amp; Trekking</h4>
+          <span>2 lezioni · 30 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+      <h3>Crescita &amp; Business</h3>
+
+      <div class="course-item">
+        <div class="course-ic">💰</div>
+        <div class="course-info">
+          <h4>Come ottimizzare il margine</h4>
+          <span>2 lezioni · 25 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+      <div class="course-item">
+        <div class="course-ic">📱</div>
+        <div class="course-info">
+          <h4>Social selling per travel consultant</h4>
+          <span>3 lezioni · 40 min</span>
+        </div>
+        <div class="course-status status-start">Inizia</div>
+      </div>
+
+    </div>
+
+    <div class="section-title">
+      <h2>I tuoi badge</h2>
+      <p>Guadagnali completando le lezioni.</p>
+    </div>
+    <div class="badge-row">
+      <div class="badge-pill earned">
+        <div class="b-ic">🚀</div>
+        <span>Primo accesso</span>
+      </div>
+      <div class="badge-pill earned">
+        <div class="b-ic">🤖</div>
+        <span>AI Esperto</span>
+      </div>
+      <div class="badge-pill">
+        <div class="b-ic">🧾</div>
+        <span>Quotation Pro</span>
+      </div>
+      <div class="badge-pill">
+        <div class="b-ic">🌍</div>
+        <span>Destination Master</span>
+      </div>
+      <div class="badge-pill">
+        <div class="b-ic">💰</div>
+        <span>Top Earner</span>
+      </div>
+      <div class="badge-pill">
+        <div class="b-ic">🏆</div>
+        <span>YONDO Certified</span>
+      </div>
+    </div>
+
+    <div style="padding:10px 20px 10px;">
+      <button class="btn btn-primary">Continua la lezione in corso →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- =====================================================
+     SCREEN 5 — ISCRIVITI (FUNNEL)
+     ===================================================== -->
+<div class="screen" id="screen-signup">
+  <div class="wrap">
+    <div class="signup-wrap">
+
+      <div class="step-indicator">
+        <div class="step-dot active" id="sd1"></div>
+        <div class="step-dot" id="sd2"></div>
+        <div class="step-dot" id="sd3"></div>
+        <div class="step-dot" id="sd4"></div>
+      </div>
+
+      <!-- Step 1: Dati personali -->
+      <div class="signup-step active" id="step-1">
+        <span class="pill" style="margin-bottom:16px; display:inline-flex;">Passo 1 di 4</span>
+        <h2>Cominciamo.<br><span class="grad-text">Chi sei?</span></h2>
+        <p class="sub">2 minuti per iniziare. Nessuna carta di credito richiesta per la prova gratuita.</p>
+
+        <div class="form-field">
+          <label>Nome e cognome</label>
+          <input type="text" placeholder="es. Giulia Lombardi" id="input-name">
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="tuaemail@gmail.com" id="input-email">
+        </div>
+        <div class="form-field">
+          <label>WhatsApp (opzionale)</label>
+          <input type="tel" placeholder="+39 333 000 0000">
+        </div>
+
+        <button class="btn btn-primary" onclick="goStep(2)" style="margin-top:8px;">Avanti →</button>
+      </div>
+
+      <!-- Step 2: Esperienza -->
+      <div class="signup-step" id="step-2">
+        <button class="back-btn" onclick="goStep(1)">← Indietro</button>
+        <span class="pill" style="margin-bottom:16px; display:inline-flex;">Passo 2 di 4</span>
+        <h2>Qual è il tuo<br><span class="grad-text">punto di partenza?</span></h2>
+        <p class="sub">Nessuna risposta è sbagliata — personalizziamo la tua esperienza in base a dove sei oggi.</p>
+
+        <div class="option-cards">
+          <div class="option-card" onclick="selectOption(this)">
+            <div class="oc-ic">🌱</div>
+            <div>
+              <h4>Parto da zero</h4>
+              <p>Nessuna esperienza nel travel, voglio iniziare un nuovo percorso professionale.</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOption(this)">
+            <div class="oc-ic">✈️</div>
+            <div>
+              <h4>Viaggio spesso, ho esperienza personale</h4>
+              <p>Conosco bene le mete ma non ho mai lavorato nel settore.</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectOption(this)">
+            <div class="oc-ic">💼</div>
+            <div>
+              <h4>Lavoro già nel travel</h4>
+              <p>Ho esperienza in agenzia o come freelance e voglio digitalizzarmi con l'AI.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="goStep(3)" style="margin-top:20px;">Avanti →</button>
+      </div>
+
+      <!-- Step 3: Piano -->
+      <div class="signup-step" id="step-3">
+        <button class="back-btn" onclick="goStep(2)">← Indietro</button>
+        <span class="pill" style="margin-bottom:16px; display:inline-flex;">Passo 3 di 4</span>
+        <h2>Il tuo piano.<br><span class="grad-text">Tutto incluso.</span></h2>
+        <p class="sub">14 giorni gratis per testare ogni singola funzionalità. Poi 79€/mese, cancellabile sempre.</p>
+
+        <div class="plan-card-main" style="margin:0 0 20px;">
+          <div class="badge-best">Incluso nella prova gratuita</div>
+          <div class="plan-name">AI Suite</div>
+          <div class="plan-price-big">79€<span>/mese</span></div>
+          <div class="plan-trial">✦ Oggi parte gratis — nessuna carta richiesta</div>
+          <div class="plan-features">
+            <div><span class="check">✓</span> Tutti i 5 AI Agent personali illimitati</div>
+            <div><span class="check">✓</span> Preventivi e proposte senza limiti</div>
+            <div><span class="check">✓</span> Client care automatizzato H24</div>
+            <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
+            <div><span class="check">✓</span> Margin share fino al 75%</div>
+            <div><span class="check">✓</span> Academy completa inclusa</div>
+            <div><span class="check">✓</span> Cancelli quando vuoi</div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" onclick="goStep(4)">Attiva la prova gratuita →</button>
+      </div>
+
+      <!-- Step 4: Conferma -->
+      <div class="signup-step" id="step-4">
+        <div class="confirm-box">
+          <div class="big-ic">🎉</div>
+          <h3>Benvenuto in YONDO!</h3>
+          <p>Abbiamo inviato il link di accesso a<br><span class="email-highlight" id="confirm-email">tuaemail@gmail.com</span><br><br>Clicca "Attiva account" nell'email per entrare nella tua dashboard con i 5 AI Agent personali pronti ad attivarsi.</p>
+        </div>
+
+        <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+          <button class="btn btn-primary" onclick="showScreen('dash')">Esplora la Dashboard →</button>
+          <button class="btn btn-ghost" onclick="showScreen('academy')">Inizia l'Academy</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
 <script>
 function showScreen(name){
-  document.getElementById('screen-home').classList.toggle('active', name==='home');
-  document.getElementById('screen-dash').classList.toggle('active', name==='dash');
-  document.getElementById('btn-home').classList.toggle('active', name==='home');
-  document.getElementById('btn-dash').classList.toggle('active', name==='dash');
+  ['home','dash','prezzi','academy','signup'].forEach(function(s){
+    document.getElementById('screen-'+s).classList.toggle('active', s===name);
+    document.getElementById('btn-'+s).classList.toggle('active', s===name);
+  });
   window.scrollTo(0,0);
+}
+
+function goStep(n){
+  var email = document.getElementById('input-email');
+  [1,2,3,4].forEach(function(i){
+    document.getElementById('step-'+i).classList.toggle('active', i===n);
+    var dot = document.getElementById('sd'+i);
+    if(i < n){ dot.className='step-dot done'; }
+    else if(i===n){ dot.className='step-dot active'; }
+    else{ dot.className='step-dot'; }
+  });
+  if(n===4 && email){
+    var v = email.value.trim() || 'tuaemail@gmail.com';
+    document.getElementById('confirm-email').textContent = v;
+  }
+  window.scrollTo(0,0);
+}
+
+function selectOption(el){
+  document.querySelectorAll('.option-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
 }
 </script>
 </body>
