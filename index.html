@@ -290,6 +290,7 @@
   .status-done{ background:rgba(34,230,200,0.12); color:var(--cyan); }
   .status-active{ background:rgba(139,92,246,0.18); color:var(--violet); }
   .status-lock{ background:rgba(255,255,255,0.05); color:var(--text-dim); }
+  .status-price{ background:rgba(139,92,246,0.18); color:var(--violet); }
   .status-start{ background:rgba(255,255,255,0.07); color:var(--text); }
 
   .badge-row{ display:flex; gap:12px; overflow-x:auto; padding:6px 20px 14px; scrollbar-width:none; }
@@ -365,11 +366,11 @@
     <div class="hero">
       <span class="pill">● Startup AI-First — Travel Consultant</span>
       <h1>Diventa un <span class="grad-text">travel consultant AI-powered</span>. Da zero a operativo in 30 giorni.</h1>
-      <p>YONDO ti affianca con 5 AI Agent personali che fanno preventivi, rispondono ai clienti, trovano destinazioni e ti coachano sui numeri — così tu vendi, e basta.</p>
+      <p>YONDO ti mette a disposizione fino a 5 AI Agent personali — dall'Academy che ti forma, al Lead Hunter che ti porta clienti, fino al Business Coach che ti guida sui numeri. Attivi il primo a 99€/mese, poi cresci quando vuoi.</p>
       <button class="btn btn-primary" onclick="showScreen('signup')">Prova gratis 14 giorni →</button>
       <div class="hero-badges">
         <div class="badge-mini">⚡ <b>60 sec</b> per proposta</div>
-        <div class="badge-mini">🤖 <b>24/7</b> operativi</div>
+        <div class="badge-mini">🤖 <b>fino a 5</b> AI Agent</div>
         <div class="badge-mini">📈 fino al <b>75%</b> di margine</div>
       </div>
     </div>
@@ -377,13 +378,51 @@
     <div class="stats-row">
       <div class="stat"><div class="num">5</div><div class="lbl">AI Agent</div></div>
       <div class="stat"><div class="num">0</div><div class="lbl">Capo umano</div></div>
-      <div class="stat"><div class="num">79€</div><div class="lbl">al mese</div></div>
+      <div class="stat"><div class="num">99€</div><div class="lbl">da /mese</div></div>
       <div class="stat"><div class="num">24/7</div><div class="lbl">Sempre attivi</div></div>
     </div>
 
     <div class="section-title">
-      <h2>Il tuo team AI, sempre con te</h2>
-      <p>5 agenti specializzati nel travel, connessi ai tuoi sistemi reali.</p>
+      <h2>I tuoi 5 AI Agent, uno alla volta</h2>
+      <p>Si sbloccano in ordine man mano che sali di livello — non ti carichiamo di tutto il giorno 1.</p>
+    </div>
+
+    <div class="agent-scroller">
+      <div class="agent-card" style="--agent-color:#ffb84f">
+        <div class="agent-icon">🎓</div>
+        <h3>My Mentor</h3>
+        <p>Ti insegna i rudimenti del mestiere che ancora non conosci, corso dopo corso, con l'Academy YONDO integrata. Il primo agent che incontri, dal giorno 1.</p>
+        <span class="agent-tag">Incluso da 99€/mese</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#ff4fa3">
+        <div class="agent-icon">🎯</div>
+        <h3>My Lead Hunter</h3>
+        <p>Trova e qualifica clienti in target per te: annunci, chatbot di primo contatto, scoring automatico dei lead più caldi. Il tuo motore di acquisizione clienti.</p>
+        <span class="agent-tag">Incluso da 199€/mese</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#22e6c8">
+        <div class="agent-icon">🧾</div>
+        <h3>My Sales Desk</h3>
+        <p>Preventivi, itinerari e prenotazioni pronti in pochi minuti, con margine ottimizzato e PDF brandizzato. Il tuo assistente per chiudere le vendite.</p>
+        <span class="agent-tag">Incluso da 199€/mese</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#8b5cf6">
+        <div class="agent-icon">📱</div>
+        <h3>My Social Studio</h3>
+        <p>Contenuti social pronti ogni settimana, brandizzati con il tuo stile e le tue destinazioni. Non tocchi Canva, non scrivi caption: pubblica e basta.</p>
+        <span class="agent-tag">Incluso da 299€/mese</span>
+      </div>
+      <div class="agent-card" style="--agent-color:#5b8def">
+        <div class="agent-icon">📊</div>
+        <h3>My Business Coach</h3>
+        <p>Monitora il tuo margine in tempo reale, ti avvisa quando un lead raffredda e ogni lunedì ti manda le 3 azioni prioritarie per aumentare i ricavi quella settimana.</p>
+        <span class="agent-tag">Incluso da 299€/mese</span>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Dentro My Sales Desk</h2>
+      <p>4 strumenti specializzati che lavorano insieme per chiudere ogni pratica.</p>
     </div>
 
     <div class="agent-scroller">
@@ -411,12 +450,6 @@
         <p>Knowledge base viva su 150+ destinazioni, fornitori, normative visti e compagnie aeree. Aggiornata ogni settimana: la memoria da esperto che un neofita non ha ancora.</p>
         <span class="agent-tag">Conoscenza</span>
       </div>
-      <div class="agent-card" style="--agent-color:#ffb84f">
-        <div class="agent-icon">📊</div>
-        <h3>My Business Coach</h3>
-        <p>Monitora il tuo margine in tempo reale, ti avvisa quando un lead raffredda e ogni lunedì ti manda le 3 azioni prioritarie per aumentare i ricavi quella settimana.</p>
-        <span class="agent-tag">Crescita</span>
-      </div>
     </div>
 
     <div class="section-title">
@@ -426,37 +459,34 @@
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-num">1</div>
-        <div><h4>Completi la registrazione</h4><p>2 minuti, dati base, nessuna competenza tecnica. Accesso immediato alla dashboard e ai 5 Agent personali.</p></div>
+        <div><h4>Completi la registrazione</h4><p>2 minuti, dati base, nessuna competenza tecnica. Scegli il tuo livello di partenza: accesso immediato alla dashboard e a My Mentor.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">2</div>
-        <div><h4>Configuri il tuo profilo</h4><p>Logo, brand, specializzazioni di destinazione: i 5 Agent diventano tuoi, con il tuo stile e il tuo nome.</p></div>
+        <div><h4>Configuri il tuo profilo</h4><p>Logo, brand, specializzazioni di destinazione: My Mentor diventa tuo, con il tuo stile e il tuo nome, e ti prepara agli agent successivi.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">3</div>
-        <div><h4>Prima proposta reale</h4><p>15 minuti hands-on con My Travel Advisor: inserisci un cliente vero e guarda la proposta uscire in meno di 60 secondi.</p></div>
+        <div><h4>Sali di livello</h4><p>Passi a Growth e sblocchi My Lead Hunter e My Sales Desk: inserisci un cliente vero e guarda la prima proposta uscire in meno di 60 secondi.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-num">4</div>
-        <div><h4>Sei operativo</h4><p>My Business Coach analizza il tuo pipeline e ti assegna gli obiettivi della prima settimana. Niente improvvisazione: solo azioni misurate.</p></div>
+        <div><h4>Sei operativo</h4><p>A Elite sblocchi anche My Social Studio e My Business Coach, che analizza il tuo pipeline e ti assegna gli obiettivi della settimana. Niente improvvisazione: solo azioni misurate.</p></div>
       </div>
     </div>
 
     <div class="pricing-card">
-      <span class="pill">AI Suite</span>
-      <div class="price">79€<span>/mese</span></div>
-      <p class="text-dim" style="font-size:13px; margin-bottom:4px;">Tutti i 5 AI Agent personali, utilizzo illimitato. 14 giorni gratis per iniziare.</p>
+      <span class="pill">3 livelli, cresci quando vuoi</span>
+      <div class="price">99€<span>/mese per iniziare</span></div>
+      <p class="text-dim" style="font-size:13px; margin-bottom:4px;">Parti con My Mentor (Academy). Sali di livello e sblocchi Lead Hunter, Sales Desk, Social Studio e Business Coach.</p>
       <div class="pricing-list">
-        <div><span class="check">✓</span> Preventivi e proposte illimitati</div>
-        <div><span class="check">✓</span> Client care automatizzato H24</div>
-        <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
-        <div><span class="check">✓</span> PDF preventivi con il tuo logo</div>
-        <div><span class="check">✓</span> Coaching settimanale sui numeri</div>
+        <div><span class="check">✓</span> 99€/mese — My Mentor + 2 corsi base inclusi</div>
+        <div><span class="check">✓</span> 199€/mese — + My Lead Hunter + My Sales Desk</div>
+        <div><span class="check">✓</span> 299€/mese — + My Social Studio + My Business Coach</div>
         <div><span class="check">✓</span> Margin share dal 55% al 75%</div>
-        <div><span class="check">✓</span> Academy completa inclusa</div>
         <div><span class="check">✓</span> Nessun contratto annuale</div>
       </div>
-      <button class="btn btn-primary" onclick="showScreen('prezzi')">Vedi tutti i moduli →</button>
+      <button class="btn btn-primary" onclick="showScreen('prezzi')">Vedi tutti i livelli →</button>
     </div>
 
     <div class="section-title">
@@ -488,7 +518,7 @@
 
     <div class="final-cta">
       <h2>Pronto a costruire il tuo studio digitale?</h2>
-      <p>Nessuna esperienza richiesta. Il team AI fa il resto. 14 giorni gratis, poi 79€/mese.</p>
+      <p>Nessuna esperienza richiesta. Il team AI fa il resto. 14 giorni gratis, poi da 99€/mese.</p>
       <button class="btn-dark" onclick="showScreen('signup')">Inizia la prova gratuita →</button>
     </div>
 
@@ -533,40 +563,41 @@
 
     <div class="agents-grid">
       <div class="agent-row">
-        <div class="ic-box" style="--agent-color:#8b5cf6">🧭</div>
+        <div class="ic-box" style="--agent-color:#ffb84f">🎓</div>
         <div class="info">
-          <h4>My Travel Advisor <span class="dot-status"></span></h4>
-          <p>Proposta pronta — Famiglia Rossi, Giappone giugno</p>
+          <h4>My Mentor <span class="dot-status"></span></h4>
+          <p>Lezione in corso: Prima proposta con Travel Advisor</p>
         </div>
+        <div class="chev">›</div>
+      </div>
+      <div class="agent-row">
+        <div class="ic-box" style="--agent-color:#ff4fa3">🎯</div>
+        <div class="info">
+          <h4>My Lead Hunter</h4>
+          <p>2 nuovi lead qualificati oggi</p>
+        </div>
+        <div class="notif-dot"></div>
         <div class="chev">›</div>
       </div>
       <div class="agent-row">
         <div class="ic-box" style="--agent-color:#22e6c8">🧾</div>
         <div class="info">
-          <h4>My Quotation Master</h4>
+          <h4>My Sales Desk <span class="dot-status"></span></h4>
           <p>3 preventivi in attesa di invio</p>
         </div>
         <div class="notif-dot"></div>
         <div class="chev">›</div>
       </div>
       <div class="agent-row">
-        <div class="ic-box" style="--agent-color:#ff4fa3">💬</div>
+        <div class="ic-box" style="--agent-color:#8b5cf6">📱</div>
         <div class="info">
-          <h4>My Client Care <span class="dot-status"></span></h4>
-          <p>5 richieste gestite automaticamente oggi</p>
+          <h4>My Social Studio</h4>
+          <p>4 contenuti pronti per questa settimana</p>
         </div>
         <div class="chev">›</div>
       </div>
       <div class="agent-row">
-        <div class="ic-box" style="--agent-color:#5b8def">🌍</div>
-        <div class="info">
-          <h4>My Destination Expert</h4>
-          <p>Aggiornamento: Giappone, stagione ciliegi 2027</p>
-        </div>
-        <div class="chev">›</div>
-      </div>
-      <div class="agent-row">
-        <div class="ic-box" style="--agent-color:#ffb84f">📊</div>
+        <div class="ic-box" style="--agent-color:#5b8def">📊</div>
         <div class="info">
           <h4>My Business Coach <span class="dot-status"></span></h4>
           <p>3 azioni prioritarie per questa settimana</p>
@@ -625,52 +656,68 @@
 
     <div class="pricing-page-header">
       <span class="pill">Trasparenza totale</span>
-      <h1>Un piano chiaro,<br><span class="grad-text">zero sorprese</span></h1>
-      <p>Tutto ciò che ti serve per essere operativo come travel consultant AI-powered, dal giorno uno.</p>
+      <h1>3 livelli,<br><span class="grad-text">crescita a tuo ritmo</span></h1>
+      <p>Fino a 5 AI Agent personali. Parti con l'Academy, sblocchi gli altri agent quando sei pronto a vendere e a scalare.</p>
     </div>
 
     <div class="plan-card-main">
-      <div class="badge-best">Piano consigliato</div>
-      <div class="plan-name">AI Suite</div>
-      <div class="plan-price-big">79€<span>/mese</span></div>
+      <div class="plan-name">Livello 1 — Starter</div>
+      <div class="plan-price-big">99€<span>/mese</span></div>
       <div class="plan-trial">✦ 14 giorni gratis — nessuna carta richiesta</div>
       <div class="plan-features">
-        <div><span class="check">✓</span> Tutti i 5 AI Agent personali, illimitati</div>
-        <div><span class="check">✓</span> Preventivi e proposte senza limiti</div>
-        <div><span class="check">✓</span> PDF brandizzati con il tuo logo</div>
-        <div><span class="check">✓</span> Client care automatizzato H24</div>
-        <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
-        <div><span class="check">✓</span> Coaching settimanale sui numeri</div>
-        <div><span class="check">✓</span> Margin share dal 55% al 75%</div>
-        <div><span class="check">✓</span> Aggiornamenti AI continui inclusi</div>
-        <div><span class="check">✓</span> Supporto prioritario via WhatsApp</div>
-        <div><span class="check">✓</span> Accesso completo all'Academy</div>
+        <div><span class="check">✓</span> My Mentor 🎓 — Academy YONDO</div>
+        <div><span class="check">✓</span> 2 corsi base inclusi nel prezzo</div>
+        <div><span class="check">✓</span> Altri corsi Academy: 250€ cad., a la carte</div>
+        <div><span class="check">✓</span> Community e supporto WhatsApp</div>
         <div><span class="check">✓</span> Cancelli quando vuoi, senza penali</div>
       </div>
-      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia gratis 14 giorni →</button>
-      <p class="plan-note">Dopo i 14 giorni, 79€/mese. Puoi cancellare in qualsiasi momento.</p>
+      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia con Livello 1 →</button>
+      <p class="plan-note">Il punto di partenza per chi non ha ancora esperienza nel travel.</p>
+    </div>
+
+    <div class="plan-card-main">
+      <div class="badge-best">Più scelto</div>
+      <div class="plan-name">Livello 2 — Growth</div>
+      <div class="plan-price-big">199€<span>/mese</span></div>
+      <div class="plan-trial">✦ Tutto il Livello 1, più:</div>
+      <div class="plan-features">
+        <div><span class="check">✓</span> My Lead Hunter 🎯 — trova e qualifica clienti</div>
+        <div><span class="check">✓</span> My Sales Desk 🧾 — preventivi, itinerari, prenotazioni</div>
+        <div><span class="check">✓</span> PDF brandizzati con il tuo logo</div>
+        <div><span class="check">✓</span> Margin share dal 55% al 65%</div>
+        <div><span class="check">✓</span> Cancelli quando vuoi, senza penali</div>
+      </div>
+      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia con Livello 2 →</button>
+      <p class="plan-note">Per chi vuole iniziare a portare a casa clienti e vendite reali.</p>
+    </div>
+
+    <div class="plan-card-main">
+      <div class="badge-best">Tutti i 5 AI Agent</div>
+      <div class="plan-name">Livello 3 — Elite</div>
+      <div class="plan-price-big">299€<span>/mese</span></div>
+      <div class="plan-trial">✦ Tutto il Livello 2, più:</div>
+      <div class="plan-features">
+        <div><span class="check">✓</span> My Social Studio 📱 — contenuti social pronti ogni settimana</div>
+        <div><span class="check">✓</span> My Business Coach 📊 — coaching settimanale sui numeri</div>
+        <div><span class="check">✓</span> Margin share dal 55% al 75%</div>
+        <div><span class="check">✓</span> Supporto prioritario via WhatsApp</div>
+        <div><span class="check">✓</span> Cancelli quando vuoi, senza penali</div>
+      </div>
+      <button class="btn btn-primary" onclick="showScreen('signup')">Inizia con Livello 3 →</button>
+      <p class="plan-note">Il pacchetto completo per chi vuole scalare il proprio studio digitale.</p>
     </div>
 
     <div class="addons-section">
-      <h2>Moduli aggiuntivi</h2>
-      <p class="addons-sub">Potenzia il tuo studio con strumenti di marketing AI. Attivabili e disattivabili quando vuoi, senza vincoli.</p>
+      <h2>Academy à la carte</h2>
+      <p class="addons-sub">In ogni livello, 2 corsi base sono sempre inclusi nel prezzo. Tutti gli altri corsi si acquistano singolarmente.</p>
 
       <div class="addon-card">
-        <div class="addon-ic">🎯</div>
+        <div class="addon-ic">🎓</div>
         <div class="addon-info">
-          <h4>AI Ads Manager</h4>
-          <p>Campagne Meta e Google gestite dall'AI. Target, creatività e budget ottimizzati automaticamente.</p>
+          <h4>Corso Academy singolo</h4>
+          <p>Specializzazioni destinazione, vendita, business — acquistabili uno alla volta, quando ti servono.</p>
         </div>
-        <div class="addon-price">+29€/m</div>
-      </div>
-
-      <div class="addon-card">
-        <div class="addon-ic">📱</div>
-        <div class="addon-info">
-          <h4>AI Social Content</h4>
-          <p>Post, Reel e Stories pronti ogni settimana, brandizzati con il tuo stile e le tue destinazioni.</p>
-        </div>
-        <div class="addon-price">+19€/m</div>
+        <div class="addon-price">250€</div>
       </div>
 
       <div class="addon-card">
@@ -697,7 +744,15 @@
 
       <div class="faq-item">
         <div class="faq-q">Devo avere esperienza nel travel?</div>
-        <div class="faq-a">No. I tuoi 5 AI Agent ti guidano in ogni aspetto del lavoro. L'Academy inclusa ti porta da zero a operativo in meno di 30 giorni.</div>
+        <div class="faq-a">No. Parti dal Livello 1 con My Mentor e l'Academy: ti porta da zero a operativo in meno di 30 giorni, prima ancora di sbloccare gli agent di vendita.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Devo per forza partire dal Livello 3 per avere tutti gli agent?</div>
+        <div class="faq-a">No. Sali di livello quando sei pronto: Livello 1 = My Mentor, Livello 2 = + My Lead Hunter e My Sales Desk, Livello 3 = + My Social Studio e My Business Coach. Puoi cambiare livello ogni mese.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Cosa include l'Academy nel Livello 1?</div>
+        <div class="faq-a">2 corsi base sono sempre inclusi nel prezzo del tuo livello. Tutti gli altri corsi (specializzazioni destinazione, vendita, business) si acquistano singolarmente a 250€ ciascuno.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Posso cancellare quando voglio?</div>
@@ -705,15 +760,15 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Come funziona il margin share?</div>
-        <div class="faq-a">Hai dal 55% al 75% del margine netto su ogni prenotazione venduta attraverso i fornitori YONDO. La percentuale cresce con il volume mensile.</div>
+        <div class="faq-a">Hai dal 55% al 75% del margine netto su ogni prenotazione venduta attraverso i fornitori YONDO. La percentuale cresce con il livello e con il volume mensile.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">I 5 Agent sono davvero "miei"?</div>
+        <div class="faq-q">Gli AI Agent sono davvero "miei"?</div>
         <div class="faq-a">Sì: imparano il tuo stile, il tuo brand e i tuoi clienti. Non condividi nulla con altri consulenti — è una AI suite privata, dedicata a te.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Cosa succede dopo i 14 giorni gratis?</div>
-        <div class="faq-a">Ricevi un promemoria email 3 giorni prima della scadenza. Se vuoi continuare, attivi il pagamento. Altrimenti l'account si mette in pausa automaticamente — nessun addebito.</div>
+        <div class="faq-a">Ricevi un promemoria email 3 giorni prima della scadenza. Se vuoi continuare, attivi il pagamento del livello scelto. Altrimenti l'account si mette in pausa automaticamente — nessun addebito.</div>
       </div>
     </div>
 
@@ -732,9 +787,9 @@
   <div class="wrap" style="padding-bottom:30px;">
 
     <div class="academy-header">
-      <span class="pill">🎓 La tua formazione</span>
+      <span class="pill">🎓 My Mentor — La tua formazione</span>
       <h1>YONDO <span class="grad-text">Academy</span></h1>
-      <p class="text-dim" style="font-size:13.5px; margin-top:6px; line-height:1.5;">Da neofita a professionista certificato, un passo alla volta.</p>
+      <p class="text-dim" style="font-size:13.5px; margin-top:6px; line-height:1.5;">Da neofita a professionista certificato, un passo alla volta. 2 corsi base inclusi nel tuo livello, gli altri 250€ cad. — a la carte.</p>
     </div>
 
     <div class="progress-bar-wrap">
@@ -773,31 +828,31 @@
         <div class="course-status status-active">In corso</div>
       </div>
 
-      <div class="course-item locked">
-        <div class="course-ic">🔒</div>
+      <div class="course-item">
+        <div class="course-ic">🎓</div>
         <div class="course-info">
           <h4>Preventivo pro con Quotation Master</h4>
-          <span>20 min</span>
+          <span>20 min · corso a la carte</span>
         </div>
-        <div class="course-status status-lock">Bloccato</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
-      <div class="course-item locked">
-        <div class="course-ic">🔒</div>
+      <div class="course-item">
+        <div class="course-ic">🎓</div>
         <div class="course-info">
           <h4>Gestire i clienti con Client Care</h4>
-          <span>18 min</span>
+          <span>18 min · corso a la carte</span>
         </div>
-        <div class="course-status status-lock">Bloccato</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
-      <div class="course-item locked">
-        <div class="course-ic">🔒</div>
+      <div class="course-item">
+        <div class="course-ic">🎓</div>
         <div class="course-info">
           <h4>Crescere con My Business Coach</h4>
-          <span>25 min</span>
+          <span>25 min · corso a la carte</span>
         </div>
-        <div class="course-status status-lock">Bloccato</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <h3>Specializzazioni Destinazioni</h3>
@@ -808,7 +863,7 @@
           <h4>Maldive &amp; Oceano Indiano</h4>
           <span>3 lezioni · 45 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <div class="course-item">
@@ -817,7 +872,7 @@
           <h4>Giappone &amp; Far East</h4>
           <span>4 lezioni · 60 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <div class="course-item">
@@ -826,7 +881,7 @@
           <h4>Caraibi &amp; America Latina</h4>
           <span>3 lezioni · 50 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <div class="course-item">
@@ -835,7 +890,7 @@
           <h4>Avventura &amp; Trekking</h4>
           <span>2 lezioni · 30 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <h3>Crescita &amp; Business</h3>
@@ -846,7 +901,7 @@
           <h4>Come ottimizzare il margine</h4>
           <span>2 lezioni · 25 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
       <div class="course-item">
@@ -855,7 +910,7 @@
           <h4>Social selling per travel consultant</h4>
           <span>3 lezioni · 40 min</span>
         </div>
-        <div class="course-status status-start">Inizia</div>
+        <div class="course-status status-price">250€</div>
       </div>
 
     </div>
@@ -972,26 +1027,34 @@
       <div class="signup-step" id="step-3">
         <button class="back-btn" onclick="goStep(2)">← Indietro</button>
         <span class="pill" style="margin-bottom:16px; display:inline-flex;">Passo 3 di 4</span>
-        <h2>Il tuo piano.<br><span class="grad-text">Tutto incluso.</span></h2>
-        <p class="sub">14 giorni gratis per testare ogni singola funzionalità. Poi 79€/mese, cancellabile sempre.</p>
+        <h2>Scegli il tuo<br><span class="grad-text">livello di partenza</span></h2>
+        <p class="sub">14 giorni gratis su qualsiasi livello. Puoi sempre salire dopo, quando sei pronto.</p>
 
-        <div class="plan-card-main" style="margin:0 0 20px;">
-          <div class="badge-best">Incluso nella prova gratuita</div>
-          <div class="plan-name">AI Suite</div>
-          <div class="plan-price-big">79€<span>/mese</span></div>
-          <div class="plan-trial">✦ Oggi parte gratis — nessuna carta richiesta</div>
-          <div class="plan-features">
-            <div><span class="check">✓</span> Tutti i 5 AI Agent personali illimitati</div>
-            <div><span class="check">✓</span> Preventivi e proposte senza limiti</div>
-            <div><span class="check">✓</span> Client care automatizzato H24</div>
-            <div><span class="check">✓</span> Knowledge base 150+ destinazioni</div>
-            <div><span class="check">✓</span> Margin share fino al 75%</div>
-            <div><span class="check">✓</span> Academy completa inclusa</div>
-            <div><span class="check">✓</span> Cancelli quando vuoi</div>
+        <div class="option-cards">
+          <div class="option-card selected" onclick="selectPlan(this,'Livello 1 — Starter','99€/mese')">
+            <div class="oc-ic">🎓</div>
+            <div>
+              <h4>Livello 1 — Starter · 99€/mese</h4>
+              <p>My Mentor (Academy) + 2 corsi base inclusi. Il punto di partenza per chi non ha ancora esperienza.</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectPlan(this,'Livello 2 — Growth','199€/mese')">
+            <div class="oc-ic">🎯</div>
+            <div>
+              <h4>Livello 2 — Growth · 199€/mese</h4>
+              <p>Tutto il Livello 1, più My Lead Hunter e My Sales Desk: trovi clienti e chiudi vendite.</p>
+            </div>
+          </div>
+          <div class="option-card" onclick="selectPlan(this,'Livello 3 — Elite','299€/mese')">
+            <div class="oc-ic">📊</div>
+            <div>
+              <h4>Livello 3 — Elite · 299€/mese</h4>
+              <p>Tutto il Livello 2, più My Social Studio e My Business Coach. Tutti e 5 gli AI Agent attivi.</p>
+            </div>
           </div>
         </div>
 
-        <button class="btn btn-primary" onclick="goStep(4)">Attiva la prova gratuita →</button>
+        <button class="btn btn-primary" onclick="goStep(4)" style="margin-top:20px;">Attiva la prova gratuita →</button>
       </div>
 
       <!-- Step 4: Conferma -->
@@ -999,7 +1062,7 @@
         <div class="confirm-box">
           <div class="big-ic">🎉</div>
           <h3>Benvenuto in YONDO!</h3>
-          <p>Abbiamo inviato il link di accesso a<br><span class="email-highlight" id="confirm-email">tuaemail@gmail.com</span><br><br>Clicca "Attiva account" nell'email per entrare nella tua dashboard con i 5 AI Agent personali pronti ad attivarsi.</p>
+          <p>Abbiamo inviato il link di accesso a<br><span class="email-highlight" id="confirm-email">tuaemail@gmail.com</span><br><br>Hai scelto <span class="email-highlight" id="confirm-plan">Livello 1 — Starter (99€/mese)</span>. Clicca "Attiva account" nell'email per entrare nella tua dashboard e iniziare con My Mentor.</p>
         </div>
 
         <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
@@ -1013,6 +1076,14 @@
 </div>
 
 <script>
+var selectedPlan = { name: 'Livello 1 — Starter', price: '99€/mese' };
+
+function selectPlan(el, name, price){
+  document.querySelectorAll('#step-3 .option-card').forEach(function(c){ c.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedPlan = { name: name, price: price };
+}
+
 function showScreen(name){
   ['home','dash','prezzi','academy','signup'].forEach(function(s){
     document.getElementById('screen-'+s).classList.toggle('active', s===name);
@@ -1030,9 +1101,12 @@ function goStep(n){
     else if(i===n){ dot.className='step-dot active'; }
     else{ dot.className='step-dot'; }
   });
-  if(n===4 && email){
-    var v = email.value.trim() || 'tuaemail@gmail.com';
-    document.getElementById('confirm-email').textContent = v;
+  if(n===4){
+    if(email){
+      var v = email.value.trim() || 'tuaemail@gmail.com';
+      document.getElementById('confirm-email').textContent = v;
+    }
+    document.getElementById('confirm-plan').textContent = selectedPlan.name + ' (' + selectedPlan.price + ')';
   }
   window.scrollTo(0,0);
 }
