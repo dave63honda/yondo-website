@@ -156,7 +156,7 @@ aumentare i costi fissi.
   ---------------------- ----------------------------------- --------------------------------------------------
   Gestione operativa     Team umano (4-6 figure)             5 AI Agent autonomi --- zero dipendenti
   Formazione             Percorso unico (1.500-3.000 euro)   Abbonamento a 3 livelli (99-299 euro/mese) + corsi a la carte (250 euro cad.)
-  Revenue sharing        Royalty 35-50% fissa                Margin Share tiered (55% -\> 75% al neofita)
+  Revenue sharing        Royalty 35-50% fissa                Margin Share tiered (40% -\> 70% al neofita)
   Marketing neofiti      Piano descritto, esecuzione umana   AI Content Bot: 20 contenuti/mese automatici
   Recruiting             Canali definiti, gestione umana     AI Recruiter Bot: selezione H24, zero intervento
   Costo struttura/anno   60.000-90.000 euro (HR)             10.000-19.000 euro (infrastruttura tech)
@@ -3083,7 +3083,7 @@ Il neofita sceglie un livello di partenza e sale quando è pronto. Ogni livello 
   2 --- Growth        199 euro/mese   + My Lead Hunter + My Sales Desk                                   Chi vuole portare a casa i primi clienti e le prime vendite
   3 --- Elite         299 euro/mese   + My Social Studio + My Business Coach                              Chi vuole scalare il proprio studio digitale con tutti e 5 gli agent
 
-Ogni livello include: 14 giorni di prova gratuita, 2 corsi Academy base inclusi nel prezzo (vedi 3.2), nessun contratto annuale, e margin share dal 55% al 75% secondo il sistema a 4 livelli della Sezione 4 (indipendente dal livello di abbonamento --- vedi nota sotto).
+Ogni livello include: 14 giorni di prova gratuita, 2 corsi Academy base inclusi nel prezzo (vedi 3.2), nessun contratto annuale, e margin share dal 40% al 70% secondo il sistema a 4 livelli della Sezione 4 (indipendente dal livello di abbonamento --- vedi nota sotto).
 
 My Sales Desk non è un singolo bot ma un hub che raggruppa 4 strumenti specializzati: My Travel Advisor (proposta viaggio in 60 secondi), My Quotation Master (preventivi PDF brandizzati), My Client Care (comunicazione post-vendita H24) e My Destination Expert (knowledge base 150+ destinazioni).
 
@@ -3147,29 +3147,29 @@ continuativa, allineando gli interessi del neofita con quelli di YONDO.
 
   **Livello**   **Nome**     **Periodo**     **Neofita**   **YONDO**   **Requisito di Avanzamento**
   ------------- ------------ --------------- ------------- ----------- --------------------------------------------------
-  L1            APPRENTICE   Mesi 1-6        55%           45%         Abbonamento attivo a un livello + acquisto min. 5 corsi (inclusi o a la carte)
-  L2            CONSULTANT   Mesi 7-18       65%           35%         10.000 euro margine cumulativo generato
+  L1            APPRENTICE   Mesi 1-6        40%           60%         Abbonamento attivo a un livello + acquisto min. 5 corsi (inclusi o a la carte)
+  L2            CONSULTANT   Mesi 7-18       50%           50%         10.000 euro margine cumulativo generato
   L3            SENIOR       Mesi 19-36      70%           30%         25.000 euro margine cumulativo generato
-  L4            MASTER       Oltre 36 mesi   75%           25%         60.000 euro margine cumulativo O 36+ mesi attivi
+  L4            MASTER       Oltre 36 mesi   70%           30%         60.000 euro margine cumulativo O 36+ mesi attivi
 
 **4.2 Esempio Pratico**
 
   **Scenario**                           **Vendita**   **Margine Lordo (12%)**   **Al Neofita**     **A YONDO**
   -------------------------------------- ------------- ------------------------- ------------------ ----------------
-  Neofita L1 --- viaggio luna di miele   3.500 euro    420 euro                  231 euro (55%)     189 euro (45%)
-  Neofita L2 --- tour di gruppo          8.000 euro    960 euro                  624 euro (65%)     336 euro (35%)
+  Neofita L1 --- viaggio luna di miele   3.500 euro    420 euro                  168 euro (40%)     252 euro (60%)
+  Neofita L2 --- tour di gruppo          8.000 euro    960 euro                  480 euro (50%)     480 euro (50%)
   Neofita L3 --- crociera lusso          12.000 euro   1.440 euro                1.008 euro (70%)   432 euro (30%)
-  Neofita L4 --- incentive aziendale     25.000 euro   3.000 euro                2.250 euro (75%)   750 euro (25%)
+  Neofita L4 --- incentive aziendale     25.000 euro   3.000 euro                2.100 euro (70%)   900 euro (30%)
 
 **4.3 Rationale della Struttura**
 
-**L1 APPRENTICE (55/45):**
+**L1 APPRENTICE (40/60):**
 
 YONDO eroga il massimo supporto --- Sales Bot, Content Bot, help desk
 H24, formazione attiva. La quota maggiore a YONDO compensa il costo
 elevato di onboarding.
 
-**L2 CONSULTANT (65/35):**
+**L2 CONSULTANT (50/50):**
 
 Il consulente e operativo e genera vendite stabili. I costi di supporto
 si riducono. YONDO mantiene una quota per la piattaforma e il marketing.
@@ -3179,7 +3179,7 @@ si riducono. YONDO mantiene una quota per la piattaforma e il marketing.
 Il consulente e sostanzialmente autonomo. YONDO mantiene solo la quota
 infrastrutturale (AI, LMS, brand).
 
-**L4 MASTER (75/25):**
+**L4 MASTER (70/30):**
 
 I top performer vengono premiati con la quota massima. Incentivo alla
 fedelta di lungo periodo e all\'eccellenza commerciale.
@@ -4025,10 +4025,10 @@ numero significativamente inferiore di neofiti attivi.
   -------------------------- ---------------------------------------------------------------------- --------------
   Abbonamento a 3 Livelli    25 neofiti abbonati x 134 euro/mese medi (mix livelli) x 8 mesi medi    26.800 euro
   Academy a la carte         30 neofiti x 0,8 corsi extra medi x 250 euro                            6.000 euro
-  Margin Share YONDO (45%)   180.000 euro vendite x 12% x 45%                                        9.720 euro
-  TOTALE RICAVI                                                                                      42.520 euro
+  Margin Share YONDO (60%)   180.000 euro vendite x 12% x 60%                                        12.960 euro
+  TOTALE RICAVI                                                                                      45.760 euro
   Costi operativi            5.850 euro/mese x 12                                                    70.200 euro
-  RISULTATO                  FASE DI INVESTIMENTO                                                    -27.680 euro
+  RISULTATO                  FASE DI INVESTIMENTO                                                    -24.440 euro
 
 **ANNO 2 --- 70 neofiti attivi**
 
@@ -4036,10 +4036,10 @@ numero significativamente inferiore di neofiti attivi.
   -------------------------------- ---------------------------------------------------------------------- --------------
   Abbonamento a 3 Livelli          65 neofiti abbonati x 174 euro/mese medi (mix livelli) x 12 mesi        135.720 euro
   Academy a la carte               70 neofiti x 1,3 corsi extra medi x 250 euro                            22.750 euro
-  Margin Share YONDO (mix L1/L2)   600.000 euro vendite x 12% x 38%                                        27.360 euro
-  TOTALE RICAVI                                                                                            185.830 euro
+  Margin Share YONDO (mix 53%)     600.000 euro vendite x 12% x 53%                                        38.160 euro
+  TOTALE RICAVI                                                                                            196.630 euro
   Costi operativi                  6.500 euro/mese x 12                                                    78.000 euro
-  RISULTATO                        BREAK-EVEN AMPIAMENTE SUPERATO                                          +107.830 euro
+  RISULTATO                        BREAK-EVEN AMPIAMENTE SUPERATO                                          +118.630 euro
 
 **ANNO 3 --- 130 neofiti attivi**
 
@@ -4047,10 +4047,10 @@ numero significativamente inferiore di neofiti attivi.
   ---------------------------------- ------------------------------------------------------------------------ -------------------------------
   Abbonamento a 3 Livelli            125 neofiti abbonati x 209 euro/mese medi (mix livelli) x 12 mesi         313.500 euro
   Academy a la carte                 130 neofiti x 1,8 corsi extra medi x 250 euro                             58.500 euro
-  Margin Share YONDO (mix livelli)   1.400.000 euro vendite x 12% x 32%                                       53.760 euro
-  TOTALE RICAVI                                                                                                425.760 euro
+  Margin Share YONDO (mix 38%)       1.400.000 euro vendite x 12% x 38%                                       63.840 euro
+  TOTALE RICAVI                                                                                                435.840 euro
   Costi operativi                    8.000 euro/mese x 12                                                     96.000 euro
-  RISULTATO                          CRESCITA CONSOLIDATA                                                     +329.760 euro (margine \~77%)
+  RISULTATO                          CRESCITA CONSOLIDATA                                                     +339.840 euro (margine \~78%)
 
 **8.3 Metodologia e Ipotesi --- Modello a 3 Livelli**
 
@@ -4064,7 +4064,7 @@ Ipotesi usate per calcolare le proiezioni sopra (vedi anche `docs/11-finanza-di-
   Mesi medi attivi nell'anno                        8           12           12
   Corsi a la carte extra medi / neofita attivo     0,8          1,3          1,8
 
-Margin Share e costi operativi restano invariati rispetto al piano precedente (non dipendono dal livello di abbonamento AI Agent).
+Costi operativi invariati rispetto al piano precedente. Le percentuali di Margin Share (Sezione 4) sono state corrette il 16/07/2026: L1 60% a YONDO (era 45%), L2 50% (era 35%), L3 30% (invariato), L4 30% (era 25%, non impatta le proiezioni sopra perché nessun neofita raggiunge L4 entro l'Anno 3). La quota media YONDO per anno è un blend L1-L4 in base all'anzianità dei neofiti: Anno 1 100% L1 = 60%, Anno 2 30% L1 + 70% L2 = 53%, Anno 3 40% L2 + 60% L3 = 38%.
 
 ROADMAP DI IMPLEMENTAZIONE --- 12 MESI
 
@@ -4960,7 +4960,7 @@ spese dirette della pratica
 
 · Calcola il margine lordo: (prezzo vendita - costo fornitore - spese)
 
-· Applica la percentuale L1 (55% al neofita, 45% a YONDO)
+· Applica la percentuale L1 (40% al neofita, 60% a YONDO)
 
 · Paga il neofita via bonifico bancario entro 15 giorni
 
@@ -5856,7 +5856,7 @@ Il processo di avanzamento è automatizzato dall\'Analytics Bot:
 
 · Quando un neofita supera 10.000 euro: notifica automatica
 
-· Aggiornamento contratto: percentuale passa da 55% a 65%
+· Aggiornamento contratto: percentuale passa da 40% a 50%
 
 · Badge digitale \"CONSULTANT\" rilasciato sulla piattaforma
 
@@ -6326,7 +6326,7 @@ by D. Volpe --- d.volpe\@thetravelexpert.it
 2. Abbonamento a 3 livelli: abbassamento della barriera d\'ingresso. Da 99 euro/mese per il Livello 1 Starter (My Mentor + Academy), fino a 299 euro/mese per il Livello 3 Elite con tutti e 5 gli AI Agent. Il neofita entra con il budget che ha, sale di livello quando è pronto, e integra con corsi Academy a la carte a 250 euro cad.
 ==========================================================================================================================================================================================================================
 
-3. Margin share che premia la fedelta e la crescita. 55% al neofita all\'inizio (quando YONDO investe di piu), 75% per i Master (quando il neofita e autonomo e fidelizzato). Un sistema che allinea gli incentivi sul lungo periodo.
+3. Margin share che premia la fedelta e la crescita. 40% al neofita all\'inizio (quando YONDO investe di piu), 70% per i Master (quando il neofita e autonomo e fidelizzato). Un sistema che allinea gli incentivi sul lungo periodo.
 =====================================================================================================================================================================================================================================
 
 4. Social media completamente gestito dagli AI YONDO. Il neofita non deve fare marketing: il Content Bot (My Social Studio) crea 20 contenuti/mese personalizzati su tutte le piattaforme. La visibilita e inclusa dal Livello 3 --- Elite (299 euro/mese) dell'abbonamento a 3 Livelli.
@@ -8926,7 +8926,7 @@ preventivo completo con tre alternative, testo evocativo già scritto, e
 due proposte di upselling. Manda il preventive la sera stessa. Il
 cliente risponde in 24 ore: accetta l\'opzione raccomandata con
 un\'experience di snorkeling aggiuntiva (upselling). Vendita: 9.800
-euro. Margine di Giulia (L1, 55%): 647 euro.
+euro. Margine di Giulia (L1, 40%): 470 euro.
 
 Tempo totale dedicato al preventivo: 12 minuti.
 
@@ -9391,14 +9391,14 @@ Il piano di lavoro AI settimana per settimana
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-5.000 euro di margine mensile equivalgono, al livello L1 (55%),
+5.000 euro di margine mensile equivalgono, al livello L1 (40%),
 ---------------------------------------------------------------
 
-a circa 9.090 euro di margine lordo generato. Con un margine medio del
-12% sul venduto, significa circa 75.000 euro di fatturato annuo,
-distribuiti in 12 mesi: circa 6.250 euro di venduto al mese. In termini
-concreti: 4-5 pratiche medie al mese (1.200-1.500 euro di vendita
-ciascuna), oppure 1-2 pratiche importanti da 3.000-4.000 euro. È un
+a circa 12.500 euro di margine lordo generato. Con un margine medio del
+12% sul venduto, significa circa 104.000 euro di fatturato annuo,
+distribuiti in 12 mesi: circa 8.700 euro di venduto al mese. In termini
+concreti: 6-7 pratiche medie al mese (1.200-1.500 euro di vendita
+ciascuna), oppure 2-3 pratiche importanti da 3.000-4.000 euro. È un
 obiettivo raggiungibile, ma richiede un piano chiaro.
 
 MESI 1-2 --- Setup e prime vendite.
@@ -9463,7 +9463,7 @@ In questa fase il sistema è rodato. L\'obiettivo è crescita:
 
 --- Iniziare a lavorare su clienti corporate se il profilo lo permette
 
---- Avanzamento al livello L2 (65% margin share) non appena si
+--- Avanzamento al livello L2 (50% margin share) non appena si
 raggiungono
 
 i 10.000 euro di margine cumulativo
@@ -9778,7 +9778,7 @@ giugno 2026
   2. Mix di livelli di abbonamento per anno                                    Anno 1: 70% L1 / 25% L2 / 5% L3. Anno 2: 45/35/20%. Anno 3: 25/40/35%. Prezzo medio: 134 / 174 / 209 €/mese
   3. Adozione dell'abbonamento                                                 Anno 1: 25/30 neofiti, 8 mesi medi attivi. Anno 2: 65/70, 12 mesi. Anno 3: 125/130, 12 mesi
   4. Corsi Academy a la carte extra/neofita attivo (oltre ai 2 base inclusi)   0,8 (Anno 1) → 1,3 (Anno 2) → 1,8 (Anno 3)
-  5. Margin Share (invariato)                                                  Stessi volumi vendita (180k/600k/1,4M €) e stessa quota YONDO (45/38/32%) del piano precedente --- indipendente dal livello di abbonamento
+  5. Margin Share (percentuali corrette 16/07/2026)                            Stessi volumi vendita (180k/600k/1,4M €); quota YONDO 60/53/38% (blend L1-L4, percentuali base L1 60%/L2 50%/L3 30%/L4 30%) --- indipendente dal livello di abbonamento
   6. Costi operativi (invariati)                                               5.850 / 6.500 / 8.000 €/mese --- l'infrastruttura tecnica non cambia, cambia solo il packaging commerciale
 
 **Da validare con l'utente**: il mix di livelli (ipotesi 2) e i corsi extra medi (ipotesi 4) sono stime ragionevoli ma non basate su dati reali di adozione, essendo un prodotto nuovo.
@@ -9787,9 +9787,9 @@ giugno 2026
 
   **Periodo**               **Vecchio TOTALE (AI Suite + add-on frammentati)**   **Nuovo TOTALE (3 livelli + Academy a la carte)**
   -------------------------- ----------------------------------------------------- -----------------------------------------------------
-  Anno 1 --- 30 neofiti      64.420 €                                              42.520 € (Sez. 8.2)
-  Anno 2 --- 70 neofiti      177.480 €                                             185.830 € (Sez. 8.2)
-  Anno 3 --- 130 neofiti     369.980 €                                             425.760 € (Sez. 8.2)
+  Anno 1 --- 30 neofiti      64.420 €                                              45.760 € (Sez. 8.2)
+  Anno 2 --- 70 neofiti      177.480 €                                             196.630 € (Sez. 8.2)
+  Anno 3 --- 130 neofiti     369.980 €                                             435.840 € (Sez. 8.2)
 
 Il nuovo modello parte più lento (Anno 1 più prudente per l'adozione graduale dell'abbonamento, che ora è il prodotto d'ingresso), ma supera il vecchio modello dall'Anno 2 in poi grazie ai prezzi più alti dei livelli Growth ed Elite. L'investimento aggiuntivo per lo sviluppo dei 5 AI Agent Personali (24.000-40.000 €) è già incluso nella Sezione 8.1.
 
